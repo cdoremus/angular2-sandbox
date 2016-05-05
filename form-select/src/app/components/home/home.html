@@ -1,0 +1,31 @@
+<h2>Fun with Select!</h2>
+<form #form="ngForm">
+  <div>
+    <div>
+      <dropdown
+        label="Superlative: "
+        [selected]="selected_superlative"
+        [options]="superlative_options"
+        (selectedChanged)="onSelectSuperlative($event)">
+      </dropdown>
+    </div>
+
+  </div>
+
+  <div>
+    <div>
+      <dropdown
+        label="Rank: "
+        [selected]="selected_rank"
+        [options]="rank_options"
+        (selectedChanged)="onSelectRank($event)">
+      </dropdown>
+    </div>
+
+
+    <button label="Click Me" (clicked)="buttonClicked($event)"></button>
+
+    <messages title="Click Button Messages" [messages]="button_messages"></messages>
+  </div>
+</form>
+<div></div>

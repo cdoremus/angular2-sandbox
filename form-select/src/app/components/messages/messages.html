@@ -1,0 +1,8 @@
+<div *ngIf="messages && messages.length > 0">
+  <div id="messages-border">
+    <div id="messages-title">{{title}}</div>
+    <div class="messages-list" *ngFor="#message of messages">
+      <div class="list-option" style="{{message.style}}">{{message.value}}</div>
+    </div>
+  </div>
+</div>
