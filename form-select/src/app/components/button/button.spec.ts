@@ -1,18 +1,17 @@
 import {
-  it,
-  describe,
-  expect,
-  async,
   inject,
-  TestComponentBuilder,
-  beforeEachProviders
-} from 'angular2/testing';
+  addProviders,
+  async,
+  TestComponentBuilder
+} from '@angular/core/testing';
 
 import {ButtonComponent} from './button.component';
 
 describe('Button Component', () => {
 
-  beforeEachProviders(() => [ButtonComponent]);
+  beforeEach(() => {
+    addProviders([ButtonComponent]);
+  });
 
   it('should have "label" defined', inject([ButtonComponent], (component) => {
     expect(component.label).toBeDefined();
@@ -27,7 +26,7 @@ describe('Button Component', () => {
       fixture.detectChanges();
 
       let compiled = fixture.debugElement.nativeElement;
-      expect(compiled.querySelector('button')).toHaveText(label);
+      expect(compiled.querySelector('button')).toContain(label);
     })
     .catch(error => console.log(`Error: ${error}`));
   })));

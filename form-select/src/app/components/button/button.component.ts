@@ -1,12 +1,12 @@
-import {Component, OnInit, Input, Output, EventEmitter} from 'angular2/core';
-import {FORM_DIRECTIVES} from 'angular2/common';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+//import {FORM_DIRECTIVES} from '@angular/forms';
 
 @Component({
   selector: 'button',
   template: require('./button.html'),
   styles: [require('./button.scss')],
   providers: [],
-  directives: [FORM_DIRECTIVES],
+  directives: [],
   pipes: []
 })
 export class ButtonComponent implements OnInit {

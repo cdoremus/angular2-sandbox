@@ -3,6 +3,6 @@
     <select
       [(ngModel)]="selected"
       (click)="onChange($event.target.value)">
-      <option *ngFor="#option of options">{{option}}</option>
+      <option *ngFor="let option of options">{{option}}</option>
     </select>
 </div>

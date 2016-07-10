@@ -1,17 +1,17 @@
 import {
-  it,
-  describe,
-  expect,
-  inject,
-  beforeEachProviders
-} from 'angular2/testing';
+  addProviders,
+  inject
+} from '@angular/core/testing';
+
 import {Api} from './api';
 
 describe('Api Service', () => {
 
-  beforeEachProviders(() => [Api]);
+  beforeEach(() => {
+    addProviders([Api]);
+  });
 
-  it('should ...', inject([Api], (api:Api) => {
+  it('should ...', inject([Api], (api: Api) => {
     expect(api.title).toBe('Angular 2');
   }));
 

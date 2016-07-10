@@ -1,21 +1,18 @@
 import {
-  it,
-  describe,
-  expect,
   inject,
-  injectAsync,
-  beforeEachProviders,
+  async,
+  addProviders,
   TestComponentBuilder
-} from 'angular2/testing';
+} from '@angular/core/testing';
 
 // Load the implementations that should be tested
 import {DropdownComponent} from './dropdown.component';
 
 describe('DropdownComponent', () => {
   // provide our implementations or mocks to the dependency injector
-  beforeEachProviders(() => [
-    DropdownComponent
-  ]);
+  beforeEach(() => {
+    addProviders([DropdownComponent]);
+  });
 
   it('should have "selected" defined', inject([DropdownComponent], (component) => {
     expect(component.selected).toBeDefined();
@@ -33,20 +30,18 @@ describe('DropdownComponent', () => {
     expect(console.log).toHaveBeenCalledWith('Hello Home');
   }));
 
+  it('should set label on template', async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+    tcb.createAsync(DropdownComponent).then((fixture) => {
+      let label = 'foobar';
+      let component: DropdownComponent = fixture.debugElement.componentInstance;
+      component.label = label;
 
-  it('should set label on template', injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-    return tcb.createAsync(DropdownComponent)
-      .then((fixture) => {
-        let label = 'foobar';
-        let component: DropdownComponent = fixture.debugElement.componentInstance;
-        component.label = label;
+      fixture.detectChanges();
 
-        fixture.detectChanges();
-
-        let compiled = fixture.debugElement.nativeElement;
-        expect(compiled.querySelector('label')).toHaveText(label);
-
-    });
-  }));
+      let compiled = fixture.debugElement.nativeElement;
+      expect(compiled.querySelector('label')).toContain(label);
+  })
+    .catch(error => console.log(`Error: ${error}`));
+  })));
 
 });

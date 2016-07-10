@@ -5,26 +5,26 @@ import {
   beforeEachProviders,
   async,
   TestComponentBuilder
-} from 'angular2/testing';
+} from '@angular/core/testing';
 
 // Load the implementations that should be tested
-import {Home} from './home';
+import {HomeComponent} from './home';
 
 describe('Home', () => {
   // provide our implementations or mocks to the dependency injector
   beforeEachProviders(() => [
-    Home
+    HomeComponent
   ]);
 
-  it('should have "selected_superlative" defined', inject([Home], (component) => {
+  it('should have "selected_superlative" defined', inject([HomeComponent], (component) => {
     expect(component.selected_superlative).toBeDefined();
   }));
 
-  it('should have "superlative_options" defined', inject([Home], (component) => {
+  it('should have "superlative_options" defined', inject([HomeComponent], (component) => {
     expect(component.superlative_options).toBeDefined();
   }));
 
-  it('should console log ngOnInit', inject([Home], (component) => {
+  it('should console log ngOnInit', inject([HomeComponent], (component) => {
     spyOn(console, 'log');
     expect(console.log).not.toHaveBeenCalled();
 
@@ -33,7 +33,7 @@ describe('Home', () => {
   }));
 
   it('template should contain "About Works!"', async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-    tcb.createAsync(Home).then((fixture) => {
+    tcb.createAsync(HomeComponent).then((fixture) => {
       fixture.detectChanges();
       let compiled = fixture.debugElement.nativeElement;
       expect(compiled.querySelector('h2').textContent.toString().trim()).toEqual('Fun with Select!');

@@ -1,26 +1,22 @@
 import {
-  it,
-  describe,
-  expect,
   inject,
-  injectAsync,
-  beforeEachProviders,
+  addProviders,
+  async,
   TestComponentBuilder
-} from 'angular2/testing';
+} from '@angular/core/testing';
 
 import {MessagesComponent} from './messages.component';
-import Message from './message';
 
 describe('Messages Component', () => {
 
-  beforeEachProviders(() => [MessagesComponent]);
+  beforeEach(() => addProviders([MessagesComponent]));
 
   it('should be defined', inject([MessagesComponent], (messages) => {
     expect(messages).toBeDefined();
   }));
 
 
-  it('should match "title" property in template when overriding template', injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+  it('should match "title" property in template when overriding template', async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
     return tcb.overrideTemplate(MessagesComponent, `<span>{{title}}</span>`)
       .createAsync(MessagesComponent).then((fixture) => {
 
@@ -35,10 +31,10 @@ describe('Messages Component', () => {
 
         console.log(`Title:`, title);
 
-        expect(title).toHaveText(newTitle);
+        expect(title).toContain(newTitle);
     })
     .catch(error => console.log(`Error: ${error}`));
-  }));
+  })));
 
 
   // it('should match "title" property in template when using real template', injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {

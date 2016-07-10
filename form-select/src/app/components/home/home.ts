@@ -1,5 +1,5 @@
-import {Component, OnInit, AfterContentChecked, AfterViewChecked} from 'angular2/core';
-import {FORM_DIRECTIVES} from 'angular2/common';
+import {Component, OnInit, AfterContentChecked, AfterViewChecked} from '@angular/core';
+//import {FORM_DIRECTIVES} from '@angular/forms';
 import {DropdownComponent} from '../dropdown/dropdown.component';
 import {MessagesComponent} from '../messages/messages.component';
 import {ButtonComponent} from '../button/button.component';
@@ -7,12 +7,12 @@ import Message from '../messages/message';
 
 @Component({
   selector: 'home',
-  directives: [DropdownComponent, FORM_DIRECTIVES, MessagesComponent, ButtonComponent],
+  directives: [DropdownComponent, MessagesComponent, ButtonComponent],
   pipes: [],
   styles: [require('./home.scss')],
   template: require('./home.html')
 })
-export class Home implements OnInit, AfterContentChecked, AfterViewChecked {
+export class HomeComponent implements OnInit, AfterContentChecked, AfterViewChecked {
   superlative_options: string[] = ['good', 'better', 'best', 'extra-ordinary', 'awesome'];
   selected_superlative: string = this.superlative_options[0];
   superlative_messages: Message[] = [];

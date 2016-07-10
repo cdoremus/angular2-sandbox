@@ -1,9 +1,9 @@
-import {Component, OnInit, Input, Output, EventEmitter} from 'angular2/core';
-import {FORM_DIRECTIVES} from 'angular2/common';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+// import {FORM_DIRECTIVES} from '@angular/forms';
 
 @Component({
   selector: 'dropdown',
-  directives: [FORM_DIRECTIVES],
+  directives: [],
   styles: [require('./dropdown.scss')],
   template: require('./dropdown.html')
 })
