@@ -4,6 +4,7 @@ import {
   async,
   TestComponentBuilder
 } from '@angular/core/testing';
+import {By} from '@angular/platform-browser';
 
 import {ButtonComponent} from './button.component';
 
@@ -21,29 +22,33 @@ describe('Button Component', () => {
     tcb.createAsync(ButtonComponent).then((fixture) => {
       let label = 'foobar';
       let component: ButtonComponent = fixture.debugElement.componentInstance;
+      let labelDebugElement = fixture.debugElement.query(By.css('button'));
       component.label = label;
 
       fixture.detectChanges();
 
-      let compiled = fixture.debugElement.nativeElement;
-      expect(compiled.querySelector('button')).toContain(label);
+      // console.log(`Element:`, labelDebugElement);
+      // console.log(`Native element:`, labelDebugElement.nativeElement);
+
+      expect(labelDebugElement.nativeElement.innerHTML).toContain(label);
     })
-    .catch(error => console.log(`Error: ${error}`));
   })));
 
-  it('button click should fire selected EventEmitter', async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+  it('button click should call ButtonComponentonClick()', async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
     tcb.createAsync(ButtonComponent).then((fixture) => {
       let component: ButtonComponent = fixture.debugElement.componentInstance;
+      spyOn(component, 'onClick');
 
       fixture.detectChanges();
 
       let compiled = fixture.debugElement.nativeElement;
       compiled.querySelector('button').click();
+      console.log("Clicked");
 
       fixture.detectChanges();
 
-      expect(component.clicked.emit).toHaveBeenCalled();
+      expect(component.onClick).toHaveBeenCalled();
     })
-    .catch(error => console.log(`Error: ${error}`));
   })));
+
 });

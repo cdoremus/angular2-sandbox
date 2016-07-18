@@ -32,7 +32,7 @@ describe('Home', () => {
     expect(console.log).toHaveBeenCalledWith('Hello Home');
   }));
 
-  it('template should contain "About Works!"', async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+  it('template should contain "Fun with Select!"', async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
     tcb.createAsync(HomeComponent).then((fixture) => {
       fixture.detectChanges();
       let compiled = fixture.debugElement.nativeElement;

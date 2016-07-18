@@ -4,6 +4,7 @@ import {
   addProviders,
   TestComponentBuilder
 } from '@angular/core/testing';
+import {By} from '@angular/platform-browser';
 
 // Load the implementations that should be tested
 import {DropdownComponent} from './dropdown.component';
@@ -35,13 +36,12 @@ describe('DropdownComponent', () => {
       let label = 'foobar';
       let component: DropdownComponent = fixture.debugElement.componentInstance;
       component.label = label;
+      let labelDebugElement = fixture.debugElement.query(By.css('label'));
 
       fixture.detectChanges();
 
-      let compiled = fixture.debugElement.nativeElement;
-      expect(compiled.querySelector('label')).toContain(label);
+      expect(labelDebugElement.nativeElement.innerHTML).toContain(label);
   })
-    .catch(error => console.log(`Error: ${error}`));
   })));
 
 });

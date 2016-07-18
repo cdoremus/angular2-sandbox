@@ -4,12 +4,22 @@ import {
   async,
   TestComponentBuilder
 } from '@angular/core/testing';
+import {By} from '@angular/platform-browser';
 
 import {MessagesComponent} from './messages.component';
+import Message from './message';
 
 describe('Messages Component', () => {
+  var builder: TestComponentBuilder;
 
-  beforeEach(() => addProviders([MessagesComponent]));
+  beforeEach(() => {
+    addProviders([MessagesComponent]);
+  });
+
+  beforeEach(inject([TestComponentBuilder], (tcb) => {
+    builder = tcb;
+  }));
+
 
   it('should be defined', inject([MessagesComponent], (messages) => {
     expect(messages).toBeDefined();
@@ -20,41 +30,22 @@ describe('Messages Component', () => {
     return tcb.overrideTemplate(MessagesComponent, `<span>{{title}}</span>`)
       .createAsync(MessagesComponent).then((fixture) => {
 
-        const newTitle = 'Title';
+        const newTitle = 'Foo Title';
         const component: MessagesComponent = fixture.debugElement.componentInstance;
+        let messages_titleDebugElement = fixture.debugElement.query(By.css('span'));
+
         component.title = newTitle;
+        component.messages = [new Message('Foo Message')];
 
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const title = compiled.querySelector('span');
+        // console.log(`Title element:`, messages_titleDebugElement);
+        // console.log(`Title native element:`, messages_titleDebugElement.nativeElement);
 
-        console.log(`Title:`, title);
+        expect(messages_titleDebugElement.nativeElement.innerHTML).toContain(newTitle);
 
-        expect(title).toContain(newTitle);
-    })
-    .catch(error => console.log(`Error: ${error}`));
+        fixture.destroy();
+    });
   })));
 
-
-  // it('should match "title" property in template when using real template', injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-  //   return tcb.createAsync(MessagesComponent).then((fixture) => {
-  //       // fixture.detectChanges();
-
-  //       let newTitle = 'Title';
-  //       let component: MessagesComponent = fixture.debugElement.componentInstance;
-  //       component.messages = [new Message('foo')];
-  //       component.title = newTitle;
-
-  //       fixture.detectChanges();
-
-  //       const compiled = fixture.debugElement.nativeElement;
-  //       const title = compiled.querySelector('div#messages-title');
-
-  //       console.log(`Title with template not overridden:`, title);
-
-  //       expect(title).toHaveText(title);
-  //   })
-  //   .catch(error => console.log(`Error: ${error}`));
-  // }));
 });

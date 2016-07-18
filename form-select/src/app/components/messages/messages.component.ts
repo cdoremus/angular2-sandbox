@@ -17,7 +17,7 @@ export class MessagesComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('Hello Messages');
+    console.log('MessagesComponent.ngOnInit()');
     this.messages = [];
   }
 
