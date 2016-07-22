@@ -1,5 +1,5 @@
 <h2>Fun with Select!</h2>
-<form #form="ngForm">
+<form #form="ngForm" (ngSubmit)="buttonClicked(form)">
   <div>
     <div>
       <dropdown
@@ -23,7 +23,7 @@
     </div>
 
 
-    <button label="Click Me" (clicked)="buttonClicked($event)"></button>
+    <button type="button" label="Click Me"></button>
 
     <messages title="Click Button Messages" [messages]="button_messages"></messages>
   </div>

@@ -60,8 +60,8 @@ export class HomeComponent implements OnInit, AfterContentChecked, AfterViewChec
     this.selected_rank = value;
   }
 
-  buttonClicked(event) {
-    console.log('Button clicked');
+  buttonClicked(form) {
+    console.log('Form button clicked', form);
     this.button_messages = [];
     this.button_messages.push(new Message(this.selected_superlative, "color:red"));
     this.button_messages.push(new Message(this.selected_rank, "color:blue"));

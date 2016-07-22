@@ -40,7 +40,7 @@ describe('DropdownComponent', () => {
 
       fixture.detectChanges();
 
-      expect(labelDebugElement.nativeElement.innerHTML).toContain(label);
+      expect(labelDebugElement.nativeElement.innerHTML).toEqual(label);
   })
   })));
 

@@ -3,6 +3,7 @@ import {bootstrap} from '@angular/platform-browser-dynamic';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {HTTP_PROVIDERS} from '@angular/http';
 import { APP_ROUTER_PROVIDERS } from './app/app.routes';
+import {disableDeprecatedForms, provideForms} from "@angular/forms";
 
 // depending on the env mode, enable prod mode or add debugging modules
 if (process.env.ENV === 'build') {
@@ -25,7 +26,8 @@ import {AppComponent} from './app/app';
     // These are dependencies of our App
     ...HTTP_PROVIDERS,
     ...APP_ROUTER_PROVIDERS,
-    provide(LocationStrategy, {useClass: HashLocationStrategy}) // use #/ routes, remove this for HTML5 mode
+    provide(LocationStrategy, {useClass: HashLocationStrategy}), // use #/ routes, remove this for HTML5 mode
+    disableDeprecatedForms(), //temporary fix in RC4
+    provideForms()
   ])
   .catch(err => console.error(err));
-// });
