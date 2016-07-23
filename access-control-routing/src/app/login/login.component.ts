@@ -12,14 +12,16 @@ import { LocalAuthTokenProvider } from './local-auth-token-provider';
             .login-form-font {
                 font-size:20px;
             }
-            label {
+            .form-label {
                 display:block;
                 margin-left:10px;
                 margin-right:auto;
+                text-align: left;
             }
             legend {
               margin: 0 0 auto 0;
               font-size: 30px;
+              text-align:left;
             }
             .text-input {
                 width:350px;
@@ -46,13 +48,13 @@ import { LocalAuthTokenProvider } from './local-auth-token-provider';
         <div class="login-form-container login-form-font">
             <form #form="ngForm" (ngSubmit)="onSubmit()">
               <fieldset class="form-container">
-                <legend align="left">Please login</legend>
+                <legend>Please login</legend>
                     <fieldset>
-                        <label>User name:</label>
+                        <label class="form-label">User name:</label>
                         <input type="text" class="text-input login-form-font" name="username" placeholder="Enter user name" tabindex="1" [(ngModel)]="username"/>
                     </fieldset>
                     <fieldset>
-                        <label>Password:</label>
+                        <label class="form-label">Password:</label>
                         <input type="password" class="text-input login-form-font" name="password" placeholder="Enter password" tabindex="2" [(ngModel)]="password"/>
                     </fieldset>
                     <div class="submit-container">

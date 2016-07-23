@@ -2,9 +2,10 @@
   <nav>
     <a [routerLink]="['home']">Home</a>
     <a [routerLink]="['about']">About</a>
+    <login-link></login-link>
   </nav>
 </header>
-<main>
+<main style="clear:both">
   <h1 class="title">Hello from {{api.title}}!</h1>
 
   <!-- Images (and assets) are parsed and loaded from within the public directory -->
