@@ -1,4 +1,4 @@
-import { Component, OnInit, provide } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, CanActivate } from '@angular/router';
 import { AuthenticationTokenProvider } from './authentication-token';
 import { LocalAuthTokenProvider } from './local-auth-token-provider';
@@ -17,7 +17,11 @@ import { LocalAuthTokenProvider } from './local-auth-token-provider';
                 margin-left:10px;
                 margin-right:auto;
             }
-            input {
+            legend {
+              margin: 0 0 auto 0;
+              font-size: 30px;
+            }
+            .text-input {
                 width:350px;
                 height:30px;
             }
@@ -40,43 +44,46 @@ import { LocalAuthTokenProvider } from './local-auth-token-provider';
   `],
   template: `
         <div class="login-form-container login-form-font">
-            <div class="form-container">
-                <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+            <form #form="ngForm" (ngSubmit)="onSubmit()">
+              <fieldset class="form-container">
+                <legend align="left">Please login</legend>
                     <fieldset>
                         <label>User name:</label>
-                        <input type="text" class="login-form-font" name="username" placeholder="Enter user name" tabindex="1" />
+                        <input type="text" class="text-input login-form-font" name="username" placeholder="Enter user name" tabindex="1" [(ngModel)]="username"/>
                     </fieldset>
                     <fieldset>
                         <label>Password:</label>
-                        <input type="password" class="login-form-font" name="password" placeholder="Enter password" tabindex="2" />
+                        <input type="password" class="text-input login-form-font" name="password" placeholder="Enter password" tabindex="2" [(ngModel)]="password"/>
                     </fieldset>
                     <div class="submit-container">
-                        <button type="button" class="login-button login-form-font" tabindex="3">Login</button>
+                        <input type="submit" class="login-button login-form-font" tabindex="3" value="Login" />
                     </div>
-                </form>
-            </div>
+              </fieldset>
+            </form>
         </div>
   `,
   directives: [ ROUTER_DIRECTIVES ],
   providers: [] //    provide(AuthenticationTokenProvider, {useClass: LocalAuthTokenProvider})
 
 })
-export class LoginComponent implements OnInit, CanActivate {
+export class LoginComponent implements OnInit {
+    @Input() username: string;
+    @Input() password: string;
 
     // constructor(private authTokenProvider: AuthenticationTokenProvider) {
     constructor(private router: Router) {
     }
 
     ngOnInit() {
-
+      console.log('Inside ngOnInit()');
     }
 
     canActivate(): boolean {
       return true;
     }
 
-    onSubmit(form): void {
-      console.log('Inside onSubmit() with form', form);
+    onSubmit(): void {
+      console.log(`Inside onSubmit() with username ${this.username} and password ${this.password}`);
 
       this.router.navigate(['/home']);
     }
