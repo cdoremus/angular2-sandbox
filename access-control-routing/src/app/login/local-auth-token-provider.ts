@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { AuthenticationTokenProvider, AUTHENTICATION_TOKEN_KEY } from './authentication-token';
+import { AuthenticationTokenProvider } from './authentication-token';
+
+const AUTHENTICATION_TOKEN: string = 'bogus-auth-token';
 
 @Injectable()
-export class LocalAuthTokenProvider implements AuthenticationTokenProvider {
+export class LocalAuthTokenProvider extends AuthenticationTokenProvider {
 
     getToken(): string {
-        return AUTHENTICATION_TOKEN_KEY;
+        return AUTHENTICATION_TOKEN;
     }
 }

@@ -8,7 +8,7 @@ export class LoginRouteGuard implements CanActivate {
 
   constructor(private loginService: LoginService) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean>|boolean {
-    return this.loginService.isLoggedIn();
+  canActivate() {
+    return true;
   }
 }

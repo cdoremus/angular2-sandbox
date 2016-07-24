@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, provide } from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, CanActivate } from '@angular/router';
 import { AuthenticationTokenProvider } from './authentication-token';
 import { LocalAuthTokenProvider } from './local-auth-token-provider';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'login',
@@ -65,15 +66,14 @@ import { LocalAuthTokenProvider } from './local-auth-token-provider';
         </div>
   `,
   directives: [ ROUTER_DIRECTIVES ],
-  providers: [] //    provide(AuthenticationTokenProvider, {useClass: LocalAuthTokenProvider})
+  providers: [ LoginService ] //
 
 })
 export class LoginComponent implements OnInit {
     @Input() username: string;
     @Input() password: string;
 
-    // constructor(private authTokenProvider: AuthenticationTokenProvider) {
-    constructor(private router: Router) {
+    constructor(private loginService: LoginService, private router: Router) {
     }
 
     ngOnInit() {
@@ -84,9 +84,11 @@ export class LoginComponent implements OnInit {
       return true;
     }
 
+
     onSubmit(): void {
       console.log(`Inside onSubmit() with username ${this.username} and password ${this.password}`);
-
-      this.router.navigate(['/home']);
+      if (this.loginService.isLoggedIn(this.username, this.password)) {
+        this.router.navigate(['/home']);
+      }
     }
 }

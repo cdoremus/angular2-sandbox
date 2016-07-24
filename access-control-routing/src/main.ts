@@ -20,6 +20,6 @@ bootstrap(AppComponent, [
     APP_ROUTER_PROVIDERS,
     disableDeprecatedForms(),
     provideForms(),
-    LoginService
+    provide(AuthenticationTokenProvider, {useClass: LocalAuthTokenProvider})
   ])
   .catch(err => console.error(err));

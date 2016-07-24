@@ -1,7 +1,8 @@
+import { Injectable } from '@angular/core';
 
-
-export interface AuthenticationTokenProvider {
-    getToken():string;
+@Injectable()
+export class AuthenticationTokenProvider {
+    getToken(): string {
+        throw Error("This needs to be subclassed");
+    }
 }
-
-export const AUTHENTICATION_TOKEN_KEY: string = 'auth-token';
