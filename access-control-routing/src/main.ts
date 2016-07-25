@@ -7,6 +7,7 @@ import { APP_ROUTER_PROVIDERS } from './app/app.routes';
 import { disableDeprecatedForms, provideForms } from '@angular/forms';
 import { AuthenticationTokenProvider } from './app/login/authentication-token';
 import { LocalAuthTokenProvider } from './app/login/local-auth-token-provider';
+import { LoginComponent } from './app/login/login.component';
 import { LoginService } from './app/login/login.service';
 
 // depending on the env mode, enable prod mode or add debugging modules
@@ -20,6 +21,8 @@ bootstrap(AppComponent, [
     APP_ROUTER_PROVIDERS,
     disableDeprecatedForms(),
     provideForms(),
-    provide(AuthenticationTokenProvider, {useClass: LocalAuthTokenProvider})
+    provide(AuthenticationTokenProvider, {useClass: LocalAuthTokenProvider}),
+    LoginService,
+    LoginComponent
   ])
   .catch(err => console.error(err));

@@ -53,3 +53,6 @@ __build__/**
 # IDE #
 .idea/
 *.swp
+
+#Used for tests in node
+test.js

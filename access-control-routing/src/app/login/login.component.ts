@@ -1,7 +1,5 @@
-import { Component, OnInit, Input, provide } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, CanActivate } from '@angular/router';
-import { AuthenticationTokenProvider } from './authentication-token';
-import { LocalAuthTokenProvider } from './local-auth-token-provider';
 import { LoginService } from './login.service';
 
 @Component({
@@ -52,11 +50,13 @@ import { LoginService } from './login.service';
                 <legend>Please login</legend>
                     <fieldset>
                         <label class="form-label">User name:</label>
-                        <input type="text" class="text-input login-form-font" name="username" placeholder="Enter user name" tabindex="1" [(ngModel)]="username"/>
+                        <input type="text" class="text-input login-form-font" name="username"
+                          placeholder="Enter user name" tabindex="1" [(ngModel)]="username"/>
                     </fieldset>
                     <fieldset>
                         <label class="form-label">Password:</label>
-                        <input type="password" class="text-input login-form-font" name="password" placeholder="Enter password" tabindex="2" [(ngModel)]="password"/>
+                        <input type="password" class="text-input login-form-font" name="password"
+                          placeholder="Enter password" tabindex="2" [(ngModel)]="password"/>
                     </fieldset>
                     <div class="submit-container">
                         <input type="submit" class="login-button login-form-font" tabindex="3" value="Login" />
@@ -66,10 +66,10 @@ import { LoginService } from './login.service';
         </div>
   `,
   directives: [ ROUTER_DIRECTIVES ],
-  providers: [ LoginService ] //
+  providers: [ ] //
 
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, CanActivate {
     @Input() username: string;
     @Input() password: string;
 
@@ -81,14 +81,21 @@ export class LoginComponent implements OnInit {
     }
 
     canActivate(): boolean {
-      return true;
+      if (this.loginService.isLoggedIn('foo', 'foo1')) {
+        return true;
+      } else {
+        this.router.navigate(['/login']);
+        return false;
+      }
     }
 
 
     onSubmit(): void {
       console.log(`Inside onSubmit() with username ${this.username} and password ${this.password}`);
-      if (this.loginService.isLoggedIn(this.username, this.password)) {
-        this.router.navigate(['/home']);
+      let loggedIn = this.loginService.isLoggedIn(this.username, this.password);
+      console.log(`Logged in: ${loggedIn}`);
+      if (loggedIn) {
+          this.router.navigate(['/home']);
       }
     }
 }
