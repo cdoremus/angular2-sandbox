@@ -1,12 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import { AuthenticationTokenProvider } from './authentication-token';
 
-export const USER_SERVICE_URL = '/users.json';
+
+export var USER_AUTH_URL = ''; // value injected in main.ts
+
 
 @Injectable()
 export class LoginService {
-    constructor(private authTokenProvider: AuthenticationTokenProvider, private http: Http) {}
+    constructor(private authTokenProvider: AuthenticationTokenProvider, private http: Http, @Inject(USER_AUTH_URL) private authUrl: string) {}
 
     isLoggedIn(username: string, password: string): boolean {
         if (this.authTokenProvider.getToken()) {
@@ -14,7 +16,7 @@ export class LoginService {
             return true;
         } else {
             console.log('Token NOT found, looking up user');
-           this.http.get(USER_SERVICE_URL)
+           this.http.get(this.authUrl)
              .subscribe((response) => {
                 let data = response.json();
                 let found = data.filter(user => user.Username === username && user.Password === password);

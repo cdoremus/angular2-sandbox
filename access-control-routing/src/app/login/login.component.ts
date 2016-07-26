@@ -45,7 +45,7 @@ import { LoginService } from './login.service';
   `],
   template: `
         <div class="login-form-container login-form-font">
-            <form #form="ngForm" (ngSubmit)="onSubmit()">
+            <form #form="ngForm" (ngSubmit)="onSubmit()" method="post">
               <fieldset class="form-container">
                 <legend>Please login</legend>
                     <fieldset>

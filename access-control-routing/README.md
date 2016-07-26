@@ -13,17 +13,18 @@ The LoginComponent implements the CanActivate interface that is used as a guard
 for all application URLs (see app.routes.ts). This guard is implemented in the LoginComponent.canActivate() method, where authetication is checked
 via the LoginService and true returned if the the user has been successfully logged in, which allows navigation to proceed.
 
+Build and run the application using the following commands:
 ```bash
-#Use the following command to install the code dependencies:
+#Install the code dependencies:
 npm install
 
-#Use the following command to build the code:
+#Build and bundle the code:
 npm run build
 
-#Use the following command to run unit tests:
+#Run unit tests:
 npm test
 
-#Use the following command to start the server:
+#Start the server:
 npm start
 ```
 ### Then browse to the following URL: [http://localhost:8080/](http://localhost:8080/)

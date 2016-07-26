@@ -8,7 +8,7 @@ import { disableDeprecatedForms, provideForms } from '@angular/forms';
 import { AuthenticationTokenProvider } from './app/login/authentication-token';
 import { LocalAuthTokenProvider } from './app/login/local-auth-token-provider';
 import { LoginComponent } from './app/login/login.component';
-import { LoginService } from './app/login/login.service';
+import { LoginService, USER_AUTH_URL } from './app/login/login.service';
 
 // depending on the env mode, enable prod mode or add debugging modules
 if (process.env.ENV === 'build') {
@@ -23,6 +23,7 @@ bootstrap(AppComponent, [
     provideForms(),
     provide(AuthenticationTokenProvider, {useClass: LocalAuthTokenProvider}),
     LoginService,
-    LoginComponent
+    LoginComponent,
+    provide(USER_AUTH_URL, {useValue: './users.json'}) // local user registry
   ])
   .catch(err => console.error(err));
