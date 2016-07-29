@@ -1,0 +1,14 @@
+
+
+<div class="form-container">
+  <form [formGroup]="searchForm">
+      <div class="autocomplete">
+        <input type="text" class="sb-input" placeholder="Enter search term"
+          [formControl]="searchForm.controls['searchInput']" />
+        <ul [ngStyle]="dropdownStyle">
+          <li *ngFor="let suggestion of suggestions" (click)="suggestionSelected(suggestion)">{{suggestion.name}}</li>
+        </ul>
+      <input type="submit" class="sb-button" value="Search" />
+      </div>
+  </form>
+</div>

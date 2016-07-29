@@ -1,0 +1,58 @@
+.form-container {
+    margin: 0 auto;
+    width: 600px;
+}
+
+.autocomplete{
+  /*width: 100%;*/
+  margin: 0 auto;
+  width: 50%;
+  position: relative;
+}
+
+.autocomplete input{
+  font-size: 1.2em;
+  width: 100%;
+  padding:0.4em;
+}
+
+.autocomplete ul{
+  position: absolute;
+  left: 0;
+  width: 80%;
+  border-left: 1px solid #888;
+  border-right: 1px solid #888;
+  border-bottom: 1px solid #888;
+  z-index: 1;
+  margin-right: 10px;
+  margin-top: 1px;
+}
+
+.autocomplete li{
+  text-align: left;
+  list-style:none;
+  width: 80%;
+  padding:0.4em;
+  color: #000;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.autocomplete li:active{
+  width: 100%;
+  border: 2px solid black;
+}
+
+.autocomplete li:hover {
+  width: 80%;
+  background-color: #4aa;
+}
+
+.autocomplete .highlight {
+  background-color: #E2E2E2;
+}
+
+.autocomplete li.active .highlight {
+  background: #666;
+  color: #fff;
+}
