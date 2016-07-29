@@ -42,8 +42,8 @@ export class SearchbarComponent implements OnInit {
             this.autocompletionService.autocompleteSearch(searchTerm)
               .subscribe(resp => {
                 let data = resp.json();
-                console.log("JSON Data: ", data);
-                console.log("JSON Data string: ", JSON.stringify(data));
+                // console.log("JSON Data: ", data);
+                // filter results using search term
                 let results = data.filter(person => person['name'].toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1)
                 console.log("Filtered search results: ", results);
                 this.suggestions = results;
