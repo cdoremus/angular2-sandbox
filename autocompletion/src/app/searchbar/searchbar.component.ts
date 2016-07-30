@@ -10,6 +10,8 @@ import {
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { AutocompletionService } from './autocompletion.service';
 
+const AUTOCOMPLETION_DELAY = 750;
+
 @Component({
   selector: 'cd-searchbar',
   templateUrl: './searchbar.component.html',
@@ -21,7 +23,8 @@ export class SearchbarComponent implements OnInit {
   suggestions: Array<string>; /// make this an input
   searchTerm: string;
   dropdownStyle: any;
-  termSelected = false;
+  isTermSelected = false;
+  termSelected: Object = {};
   searchForm: FormGroup;
   searchInput: AbstractControl;
 
@@ -33,23 +36,24 @@ export class SearchbarComponent implements OnInit {
     this.searchInput = this.searchForm.controls['searchInput'];
 
     this.searchInput.valueChanges
-      .debounceTime(750)
+      .debounceTime(AUTOCOMPLETION_DELAY)
       .distinctUntilChanged()
       .subscribe(
         searchTerm => {
-          if (searchTerm && searchTerm !== '') {
+          if (searchTerm && searchTerm !== '' && !this.isTermSelected) {
             this.dropdownStyle = {display: 'block'};
             this.autocompletionService.autocompleteSearch(searchTerm)
               .subscribe(resp => {
                 let data = resp.json();
                 // console.log("JSON Data: ", data);
                 // filter results using search term
-                let results = data.filter(person => person['name'].toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1)
+                let results = data.filter(person => person['name'].toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
                 console.log("Filtered search results: ", results);
                 this.suggestions = results;
               });
           } else {
-              this.dropdownStyle = {display: 'none'};
+            this.dropdownStyle = {display: 'none'};
+            this.isTermSelected = false;
           }
         }
       );
@@ -63,36 +67,11 @@ export class SearchbarComponent implements OnInit {
   }
 
   suggestionSelected(suggestion: string) {
-    this.termSelected = true;
-    console.log(`Suggestion selected: ${suggestion}`);
-  }
-
-  keyup(): void {
-    console.log(`Search term: ${this.searchTerm}`);
-    // toggle visability of display
-    if (!this.searchTerm || this.searchTerm === '') {
-      this.dropdownStyle = {display: 'none'};
-    } else {
-      this.dropdownStyle = {display: 'block'};
-      console.log(`Search term: ${this.searchTerm}`);
-
-      // this.autocompletionService.getCities(this.searchTerm)
-      //     .subscribe( response => {
-      //       console.log(`Response`, response);
-      //     });
-
-      // let results = this.wundergroundService.autocompleteSearch(this.searchTerm);
-      // console.log("Search results: ", results);
-
-      this.autocompletionService.autocompleteSearch(this.searchTerm)
-        .subscribe(resp => {
-          let data = resp.json();
-          let results = data.filter(person => person['name'].substring(this.searchTerm) != -1)
-          console.log("Search results: ", results);
-          this.suggestions = results;
-        });
-
-    }
+    this.isTermSelected = true;
+    console.log(`Suggestion selected:`, suggestion);
+    this.termSelected = suggestion;
+    this.searchTerm = suggestion['name'];
+    this.dropdownStyle = {display: 'none'};
   }
 
 }

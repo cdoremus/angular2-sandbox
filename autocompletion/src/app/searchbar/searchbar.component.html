@@ -3,10 +3,11 @@
 <div class="form-container">
   <form [formGroup]="searchForm">
       <div class="autocomplete">
-        <input type="text" class="sb-input" placeholder="Enter search term"
-          [formControl]="searchForm.controls['searchInput']" />
+        <input type="text" class="sb-input" placeholder="Enter search term" [(ngModel)]="searchTerm"
+          [formControl]="searchForm.controls['searchInput']" tabindex="1"/>
         <ul [ngStyle]="dropdownStyle">
-          <li *ngFor="let suggestion of suggestions" (click)="suggestionSelected(suggestion)">{{suggestion.name}}</li>
+          <li *ngFor="let suggestion of suggestions; let i = index"
+            (click)="suggestionSelected(suggestion)" tabindex="{{i + 2}}">{{suggestion.name}}</li>
         </ul>
       <input type="submit" class="sb-button" value="Search" />
       </div>

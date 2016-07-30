@@ -48,8 +48,9 @@
   background-color: #4aa;
 }
 
-.autocomplete .highlight {
-  background-color: #E2E2E2;
+.autocomplete li:focus {
+  width: 80%;
+  background-color: #4aa;
 }
 
 .autocomplete li.active .highlight {
