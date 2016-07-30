@@ -10,7 +10,7 @@ describe('Api Service', () => {
     addProviders([ApiService]);
   });
 
-  it('should ...', inject([ApiService], (api: ApiService) => {
+  it('title property text should be "Angular 2"', inject([ApiService], (api: ApiService) => {
     expect(api.title).toBe('Angular 2');
   }));
 });

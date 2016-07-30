@@ -53,3 +53,6 @@ __build__/**
 # IDE #
 .idea/
 *.swp
+
+# log files
+*.log

@@ -3,13 +3,28 @@
 import { addProviders, async, inject } from '@angular/core/testing';
 import { AutocompletionService } from './autocompletion.service';
 
-describe('Service: Wunderground', () => {
+import { BaseRequestOptions, Http } from '@angular/http';
+import { MockBackend } from '@angular/http/testing';
+
+describe('AutocompletionService', () => {
   beforeEach(() => {
-    addProviders([AutocompletionService]);
+    addProviders([
+      AutocompletionService,
+      BaseRequestOptions,
+      MockBackend,
+      // Provide a mocked (fake) backend for Http
+      {
+        provide: Http,
+        deps: [MockBackend, BaseRequestOptions],
+        useFactory: function useFactory(backend, defaultOptions) {
+          return new Http(backend, defaultOptions);
+        }
+      }
+      ]);
   });
 
-  it('should ...',
-    inject([AutocompletionService],
+  it('should create an instance of AutocompletionService',
+    inject([AutocompletionService, Http],
       (service: AutocompletionService) => {
         expect(service).toBeTruthy();
       }));

@@ -1,14 +1,12 @@
-/* tslint:disable:no-unused-variable */
-
-import { addProviders, async, inject } from '@angular/core/testing';
+import { addProviders, inject } from '@angular/core/testing';
 import { SearchbarService } from './searchbar.service';
 
-describe('Service: Searchbar', () => {
+describe('SearchbarService', () => {
   beforeEach(() => {
     addProviders([SearchbarService]);
   });
 
-  it('should ...',
+  it('should create an instance',
     inject([SearchbarService],
       (service: SearchbarService) => {
         expect(service).toBeTruthy();

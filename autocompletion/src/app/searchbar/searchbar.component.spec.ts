@@ -3,12 +3,34 @@
 import { By }           from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { addProviders, async, inject } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
+import { BaseRequestOptions, Http } from '@angular/http';
+import { MockBackend } from '@angular/http/testing';
 import { SearchbarComponent } from './searchbar.component';
+import { AutocompletionService } from './autocompletion.service';
 
 
-describe('Component: Searchbar', () => {
-  it('should create an instance', () => {
-    let component = new SearchbarComponent(null, null);
-    expect(component).toBeTruthy();
-  });
+describe('SearchbarComponent', () => {
+
+    beforeEach(() => {
+    addProviders([
+      FormBuilder,
+      AutocompletionService,
+      BaseRequestOptions,
+      MockBackend,
+      // Provide a mocked (fake) backend for Http
+      {
+        provide: Http,
+        deps: [MockBackend, BaseRequestOptions],
+        useFactory: function useFactory(backend, defaultOptions) {
+          return new Http(backend, defaultOptions);
+        }
+      }
+      ])
+    });
+  it('should create an instance',
+    inject([FormBuilder, AutocompletionService, Http],
+      (component: SearchbarComponent) => {
+        expect(component).toBeTruthy();
+      }));
 });
