@@ -24,15 +24,20 @@
   border-right: 1px solid #888;
   border-bottom: 1px solid #888;
   z-index: 1;
-  margin-right: 10px;
+  background-color: #fff;
+  margin-right: 0px;
+  margin-left: 0px;
   margin-top: 1px;
+  padding-left: 0px;
 }
 
 .autocomplete li{
   text-align: left;
-  list-style:none;
-  width: 80%;
-  padding:0.4em;
+  text-indent: 5px;
+  list-style:none none outside;
+  width: 100%;
+  padding-bottom:0.4em;
+  padding-top:0.4em;
   color: #000;
   background-color: #fff;
   cursor: pointer;
@@ -44,12 +49,12 @@
 }
 
 .autocomplete li:hover {
-  width: 80%;
+  width: 100%;
   background-color: #4aa;
 }
 
 .autocomplete li:focus {
-  width: 80%;
+  width: 100%;
   background-color: #4aa;
 }
 

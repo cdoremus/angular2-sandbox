@@ -7,9 +7,11 @@
           [formControl]="searchForm.controls['searchInput']" tabindex="1"/>
         <ul [ngStyle]="dropdownStyle">
           <li *ngFor="let suggestion of suggestions; let i = index"
-            (click)="suggestionSelected(suggestion)" tabindex="{{i + 2}}">{{suggestion.name}}</li>
+            (click)="suggestionSelected(suggestion)" tabindex="{{i + 2}}" (keydown)="itemSelected($event, suggestion)">
+            {{suggestion.name}}
+          </li>
         </ul>
-      <input type="submit" class="sb-button" value="Search" />
       </div>
+      <input type="submit" class="sb-button" value="Search" />
   </form>
 </div>

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Http } from '@angular/http';
 
 const DEBOUNCE_TIME = 2000;
 const AUTOCOMPLETE_URL = './users.json';
@@ -11,7 +10,7 @@ export class AutocompletionService {
   constructor(private http: Http) { }
 
   getCities(searchTerm: string) {
-    console.log("Search term: ", searchTerm);
+    console.log('Search term:', searchTerm);
     return this.autocompleteSearch(searchTerm)
       .debounceTime(DEBOUNCE_TIME)
       .distinctUntilChanged();

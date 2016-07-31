@@ -1,7 +1,5 @@
-fieldset {
-    width: 25%;
-    border: 0;
+.sb-button {
+    /*width: 30%;*/
+    font-size: 25px;
+    margin-top: 10px;
 }
-/*.sb-input {
-    width: 85%;
-}*/

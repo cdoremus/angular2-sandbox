@@ -7,7 +7,6 @@ import {
   Validators,
   AbstractControl
 } from '@angular/forms';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { AutocompletionService } from './autocompletion.service';
 
 const AUTOCOMPLETION_DELAY = 750;
@@ -15,7 +14,7 @@ const AUTOCOMPLETION_DELAY = 750;
 @Component({
   selector: 'cd-searchbar',
   templateUrl: './searchbar.component.html',
-  styleUrls: ['./autocomplete.css'],
+  styleUrls: ['./autocomplete.css', './searchbar.component.css'],
   providers: [AutocompletionService],
   directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES]
 })
@@ -41,14 +40,14 @@ export class SearchbarComponent implements OnInit {
       .subscribe(
         searchTerm => {
           if (searchTerm && searchTerm !== '' && !this.isTermSelected) {
-            this.dropdownStyle = {display: 'block'};
+            this.dropdownStyle = {display: 'inline'};
             this.autocompletionService.autocompleteSearch(searchTerm)
               .subscribe(resp => {
                 let data = resp.json();
                 // console.log("JSON Data: ", data);
                 // filter results using search term
                 let results = data.filter(person => person['name'].toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
-                console.log("Filtered search results: ", results);
+                console.log('Filtered search results:', results);
                 this.suggestions = results;
               });
           } else {
@@ -74,4 +73,20 @@ export class SearchbarComponent implements OnInit {
     this.dropdownStyle = {display: 'none'};
   }
 
+  itemSelected(event, suggestion) {
+    console.log('Item selected with event', event);
+    console.log(`${event.code} key selected`);
+    switch (event.code) {
+      case 'Enter':
+        this.suggestionSelected(suggestion);
+        break;
+      case 'ArrowUp':
+
+        break;
+      case 'ArrowDown':
+
+        break;
+    }
+
+  }
 }
