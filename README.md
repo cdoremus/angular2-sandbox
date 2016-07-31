@@ -1,9 +1,8 @@
-# angular2-sandbox
-Holds my Angular 2 experiments/examples
+# angular2-sandbox autocompletion branch
 
 This branch contains an autocompletion example triggered by value changes in a text control.
 
-All work is in the [autocompletion folder](https://github.com/cdoremus/angular2-sandbox/tree/autocompletion/autocompletion).
+All source code is in the [autocompletion folder](https://github.com/cdoremus/angular2-sandbox/tree/autocompletion/autocompletion).
 
 ### Screenshots of the autcompletion component in action:
 
