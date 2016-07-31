@@ -7,7 +7,7 @@
 The home page contains a text input control. Entering text into the control will pull up an autocompletion list of users whose name contains the substring
 entered in the text control. Selecting an item from the list causes it to be displayed in the text control.
 
-TODO: Finish autocompletion selection behaviors and get Search button to work.
+TODO: Get Search button to work.
 
 Build and run the application using the following commands:
 ```bash
