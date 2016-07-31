@@ -57,7 +57,6 @@ export class SearchbarComponent implements OnInit {
         }
       );
 
-    // this.suggestions  = ['one', 'two', 'three', 'four', 'five'];
   }
 
   ngOnInit() {
@@ -67,26 +66,43 @@ export class SearchbarComponent implements OnInit {
 
   suggestionSelected(suggestion: string) {
     this.isTermSelected = true;
-    console.log(`Suggestion selected:`, suggestion);
     this.termSelected = suggestion;
     this.searchTerm = suggestion['name'];
     this.dropdownStyle = {display: 'none'};
   }
 
   itemSelected(event, suggestion) {
-    console.log('Item selected with event', event);
-    console.log(`${event.code} key selected`);
+    // console.log('Item selected with event', event);
+    // console.log(`${event.code} key selected`);
     switch (event.code) {
       case 'Enter':
         this.suggestionSelected(suggestion);
         break;
       case 'ArrowUp':
-
+        // move to previous li on down arrow (if one exists)
+        let prev = event.target.previousElementSibling
+        if (prev) {
+          prev.focus();
+        }
         break;
       case 'ArrowDown':
-
+        // move to next li on down arrow (if one exists)
+        // an occasional 'not a function' error is generated
+        if (event.target.nextSibling.focus) {
+          event.target.nextSibling.focus();
+        }
         break;
     }
+  }
 
+  inputKeydown(event) {
+    // console.log('Input keydown event', event);
+    // move to first li on down arrow (if one exists)
+    let sibling = event.target.nextElementSibling;
+    if (event.code === 'ArrowDown' && sibling) {
+      if (sibling.children.length > 0) {
+        sibling.children[0].focus();
+      }
+    }
   }
 }
