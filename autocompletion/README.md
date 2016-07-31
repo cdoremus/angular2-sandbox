@@ -6,8 +6,11 @@
 
 The home page contains a text input control. Entering text into the control will pull up an autocompletion list of users whose name contains the substring
 entered in the text control. Selecting an item from the list causes it to be displayed in the text control.
+The tab, up and down arrow keys can be used to scroll through the list and the Enter key used to complete a selection.
 
-TODO: Get Search button to work.
+Data for the drop down is stored in the users.json file that is queried asychronously using the Angular 2 Http service.
+
+TODO: Refactor autocompletion input into a separate presentation/dumb component and get Search button to work.
 
 Build and run the application using the following commands:
 ```bash
