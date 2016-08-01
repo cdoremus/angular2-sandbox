@@ -2,6 +2,8 @@
 
 This branch contains an autocompletion example triggered by value changes in a text control.
 
+A working example of the app can be found [here](http://cdoremus.github.com/autocompletion/index.html).
+
 All source code is in the [autocompletion folder](https://github.com/cdoremus/angular2-sandbox/tree/autocompletion/autocompletion).
 
 ### Screenshots of the autcompletion component in action:
