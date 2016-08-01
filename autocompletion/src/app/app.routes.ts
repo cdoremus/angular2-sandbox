@@ -5,7 +5,8 @@ import { AboutComponent } from './about';
 
 export const routes: RouterConfig = [
   { path: '', component: HomeComponent },
-  { path: 'about', component: AboutComponent}
+  { path: 'about', component: AboutComponent},
+  { path: 'autocompletion', component: HomeComponent}
 ];
 
 export const APP_ROUTER_PROVIDERS = [
