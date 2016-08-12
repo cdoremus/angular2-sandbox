@@ -1,11 +1,11 @@
 
 
 <div class="form-container">
-  <form [formGroup]="searchForm">
+  <form>
       <div class="autocomplete">
         <input type="text" id="autocompletionInput" class="sb-input"
-          placeholder="Enter search term" [(ngModel)]="searchTerm"
-          [formControl]="searchForm.controls['searchInput']" tabindex="1" (keydown)="inputKeydown($event)"/>
+          placeholder="Enter search term" [formControl]="searchInput"
+          tabindex="1" (keydown)="inputKeydown($event)"/>
         <ul id="autcompletionDropdown" [ngStyle]="dropdownStyle">
           <li *ngFor="let suggestion of suggestions; let i = index"
             (click)="suggestionSelected(suggestion)" tabindex="{{i + 2}}"

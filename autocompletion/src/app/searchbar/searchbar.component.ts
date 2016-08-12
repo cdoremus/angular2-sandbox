@@ -1,15 +1,29 @@
+/**
+ * Search Bar Component
+ * A text input that does autocompletion/typeahead. It also handles navigation
+ * through the various typeahead options using the Up and Down arrow keys.
+ *
+ * The autocompletion data comes from a call to the backend using the HttpService in
+ * the HttpModule. This example has the service pull data from a JSON file rather
+ * than doing a real remote http call.
+ *
+ * The following reference was very helpful in upgrading to RC5:
+ * http://blog.thoughtram.io/angular/2016/06/22/model-driven-forms-in-angular-2.html
+ *
+ */
 import { Component, OnInit } from '@angular/core';
 import {
-  FORM_DIRECTIVES,
-  REACTIVE_FORM_DIRECTIVES,
-  FormBuilder,
-  FormGroup,
-  Validators,
-  AbstractControl
+  FormControl
 } from '@angular/forms';
 import { AutocompletionService } from './autocompletion.service';
 
 const AUTOCOMPLETION_DELAY = 750;
+
+const enum KeyCode {
+  Enter = 13,
+  ArrowUp = 38,
+  ArrowDown = 40
+}
 
 @Component({
   selector: 'cd-searchbar',
@@ -22,15 +36,10 @@ export class SearchbarComponent implements OnInit {
   dropdownStyle: any;
   isTermSelected = false;
   termSelected: Object = {};
-  searchForm: FormGroup;
-  searchInput: AbstractControl;
+  searchInput: FormControl = new FormControl();
 
-  constructor(private fb: FormBuilder, private autocompletionService: AutocompletionService) {
+  constructor(private autocompletionService: AutocompletionService) {
     this.suggestions = [];
-    this.searchForm = fb.group({
-      'searchInput': ['', Validators.required]
-    });
-    this.searchInput = this.searchForm.controls['searchInput'];
 
     this.searchInput.valueChanges
       .debounceTime(AUTOCOMPLETION_DELAY)
@@ -65,25 +74,25 @@ export class SearchbarComponent implements OnInit {
   suggestionSelected(suggestion: string) {
     this.isTermSelected = true;
     this.termSelected = suggestion;
-    this.searchTerm = suggestion['name'];
+    this.searchInput.setValue(suggestion['name']);
     this.dropdownStyle = {display: 'none'};
   }
 
   itemSelected(event, suggestion) {
     // console.log('Item selected with event', event);
     // console.log(`${event.code} key selected`);
-    switch (event.code) {
-      case 'Enter':
+    switch (event.keyCode) {
+      case KeyCode.Enter: //code=13
         this.suggestionSelected(suggestion);
         break;
-      case 'ArrowUp':
+      case KeyCode.ArrowUp: //code=38
         // move to previous li on down arrow (if one exists)
-        let prev = event.target.previousElementSibling
+        let prev = event.target.previousElementSibling;
         if (prev) {
           prev.focus();
         }
         break;
-      case 'ArrowDown':
+      case KeyCode.ArrowDown: //code=40
         // move to next li on down arrow (if one exists)
         // an occasional 'not a function' error is generated
         if (event.target.nextSibling.focus) {
