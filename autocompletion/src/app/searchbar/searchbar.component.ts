@@ -39,6 +39,7 @@ export class SearchbarComponent implements OnInit {
   searchInput: FormControl = new FormControl();
 
   constructor(private autocompletionService: AutocompletionService) {
+    // console.log("SearchbarComponent constructor called");
     this.suggestions = [];
 
     this.searchInput.valueChanges
@@ -49,24 +50,33 @@ export class SearchbarComponent implements OnInit {
           if (searchTerm && searchTerm !== '' && !this.isTermSelected) {
             this.dropdownStyle = {display: 'inline'};
             this.autocompletionService.autocompleteSearch(searchTerm)
-              .subscribe(resp => {
-                let data = resp.json();
-                // console.log("JSON Data: ", data);
-                // filter results using search term
-                let results = data.filter(person => person['name'].toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
-                console.log('Filtered search results:', results);
-                this.suggestions = results;
-              });
+              .subscribe(
+                resp => {
+                  let data = resp.json();
+                  // console.log("JSON Data: ", data);
+                  // filter results using search term
+                  let results = data.filter(person => person['name'].toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
+                  console.log('Filtered search results:', results);
+                  this.suggestions = results;
+                },
+                error => {
+                  console.log("Error doing autocompletion search", error);
+                }
+                );
           } else {
             this.dropdownStyle = {display: 'none'};
             this.isTermSelected = false;
           }
+        },
+        error => {
+          console.log("Error in input component valueChanges event", error);
         }
       );
 
   }
 
   ngOnInit() {
+    // console.log("SearchbarComponent.ngOnInit() called");
     this.searchTerm = '';
     this.dropdownStyle = {display: 'none'};
   }
