@@ -14,9 +14,7 @@ const AUTOCOMPLETION_DELAY = 750;
 @Component({
   selector: 'cd-searchbar',
   templateUrl: './searchbar.component.html',
-  styleUrls: ['./autocomplete.css', './searchbar.component.css'],
-  providers: [AutocompletionService],
-  directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES]
+  styleUrls: ['./autocomplete.css', './searchbar.component.css']
 })
 export class SearchbarComponent implements OnInit {
   suggestions: Array<string>; /// make this an input

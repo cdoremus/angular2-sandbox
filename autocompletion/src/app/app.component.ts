@@ -11,8 +11,6 @@ import '../style/app.scss';
  */
 @Component({
   selector: 'my-app', // <my-app></my-app>
-  providers: [ApiService],
-  directives: [...ROUTER_DIRECTIVES],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
