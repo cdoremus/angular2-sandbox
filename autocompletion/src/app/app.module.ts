@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent }   from './app.component';
 import { ApiService } from './shared';
 import { AboutComponent } from './about/about.component';
+import { HomeComponent } from './home/home.component';
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { AutocompletionService } from './searchbar/autocompletion.service';
 import { routes } from './app.routes';
@@ -21,6 +22,7 @@ import { routes } from './app.routes';
     declarations: [
       AppComponent,
       AboutComponent,
+      HomeComponent,
       SearchbarComponent
       ],
     providers: [
