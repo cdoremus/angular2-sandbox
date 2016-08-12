@@ -82,17 +82,17 @@ export class SearchbarComponent implements OnInit {
     // console.log('Item selected with event', event);
     // console.log(`${event.code} key selected`);
     switch (event.keyCode) {
-      case KeyCode.Enter: //code=13
+      case KeyCode.Enter: // code=13
         this.suggestionSelected(suggestion);
         break;
-      case KeyCode.ArrowUp: //code=38
+      case KeyCode.ArrowUp: // code=38
         // move to previous li on down arrow (if one exists)
         let prev = event.target.previousElementSibling;
         if (prev) {
           prev.focus();
         }
         break;
-      case KeyCode.ArrowDown: //code=40
+      case KeyCode.ArrowDown: // code=40
         // move to next li on down arrow (if one exists)
         // an occasional 'not a function' error is generated
         if (event.target.nextSibling.focus) {
@@ -106,7 +106,7 @@ export class SearchbarComponent implements OnInit {
     // console.log('Input keydown event', event);
     // move to first li on down arrow (if one exists)
     let sibling = event.target.nextElementSibling;
-    if (event.code === 'ArrowDown' && sibling) {
+    if (event.keyCode === KeyCode.ArrowDown && sibling) {
       if (sibling.children.length > 0) {
         sibling.children[0].focus();
       }
