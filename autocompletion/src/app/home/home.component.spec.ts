@@ -1,15 +1,16 @@
-import {
-  inject,
-  addProviders,
-} from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { TestBed, inject, addProviders } from '@angular/core/testing';
 
 // Load the implementations that should be tested
 import { HomeComponent } from './home.component';
 
-describe('Home', () => {
-  // provide our implementations or mocks to the dependency injector
+describe('HomeComponent', () => {
+  const html = '<my-home></my-home>';
+
   beforeEach(() => {
-    addProviders([HomeComponent]);
+    TestBed.configureTestingModule({declarations: [HomeComponent, TestComponent]});
+    TestBed.overrideComponent(TestComponent, { set: { template: html }});
+     addProviders([HomeComponent]);
   });
 
   it('should log ngOnInit', inject([HomeComponent], (home) => {
@@ -20,4 +21,13 @@ describe('Home', () => {
     expect(console.log).toHaveBeenCalledWith('Hello Home');
   }));
 
+  it('Component should contain text "Home Page"', () => {
+    const fixture = TestBed.createComponent(TestComponent);
+    fixture.detectChanges();
+    expect(fixture.nativeElement.children[0].textContent).toContain('Home Page');
+  });
+
 });
+
+@Component({selector: 'my-test', template: ''})
+class TestComponent { }
