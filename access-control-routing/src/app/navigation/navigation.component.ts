@@ -20,16 +20,6 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit() {
     console.log("NavigationComponent.ngOnInit() called");
-    this.loginService.loginLinkSubject.subscribe(param => {
-      this.toggleLogin(param);
-    });
-
-
   }
-
-
-   toggleLogin(linkText: string): void {
-     this.loginLinkText = (linkText === 'Login'.toLowerCase() ? 'Logout' : 'Login');
-   }
 
 }
