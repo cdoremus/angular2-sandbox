@@ -60,7 +60,7 @@ export class SearchbarComponent implements OnInit {
                   this.suggestions = results;
                 },
                 error => {
-                  console.log("Error doing autocompletion search", error);
+                  console.log('Error doing autocompletion search', error);
                 }
                 );
           } else {
@@ -69,7 +69,7 @@ export class SearchbarComponent implements OnInit {
           }
         },
         error => {
-          console.log("Error in input component valueChanges event", error);
+          console.log('Error in input component valueChanges event', error);
         }
       );
 

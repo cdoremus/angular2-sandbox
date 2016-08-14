@@ -9,13 +9,6 @@ export class AutocompletionService {
 
   constructor(private http: Http) { }
 
-  getCities(searchTerm: string) {
-    console.log('Search term:', searchTerm);
-    return this.autocompleteSearch(searchTerm)
-      .debounceTime(DEBOUNCE_TIME)
-      .distinctUntilChanged();
-  }
-
   autocompleteSearch(term: string) {
     console.log(`Term lookup: ${term}`);
     return this.http.get(`${AUTOCOMPLETE_URL}`)
