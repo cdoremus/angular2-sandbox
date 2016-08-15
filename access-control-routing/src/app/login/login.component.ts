@@ -1,6 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ROUTER_DIRECTIVES, Router, CanActivate } from '@angular/router';
+import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Router, CanActivate } from '@angular/router';
 import { LoginService } from './login.service';
+import { AuthenticationTokenProvider } from './authentication-token';
+import { LocalAuthTokenProvider } from './local-auth-token-provider';
+
+// Change based on local vs remote calls and deployment location
+export const USER_AUTH_URL = 'AUTH_URL';
+export const authUrl = './users.json';
+
 
 @Component({
   selector: 'login',
@@ -51,7 +58,7 @@ import { LoginService } from './login.service';
                     <fieldset>
                         <label class="form-label">User name:</label>
                         <input type="text" class="text-input login-form-font" name="username"
-                          placeholder="Enter user name" tabindex="1" [(ngModel)]="username"/>
+                          placeholder="Enter user name" tabindex="1" [(ngModel)]="username" />
                     </fieldset>
                     <fieldset>
                         <label class="form-label">Password:</label>
@@ -65,15 +72,21 @@ import { LoginService } from './login.service';
             </form>
         </div>
   `,
-  directives: [ ROUTER_DIRECTIVES ],
-  providers: [ ] //
+  providers: [
+    LoginService,
+    {provide: AuthenticationTokenProvider, useClass: LocalAuthTokenProvider},
+    {provide: USER_AUTH_URL, useValue: authUrl}
+    ] //
 
 })
 export class LoginComponent implements OnInit, CanActivate {
     @Input() username: string;
     @Input() password: string;
 
-    constructor(private loginService: LoginService, private router: Router) {
+    constructor(
+      private loginService: LoginService,
+      private router: Router,
+      @Inject(USER_AUTH_URL) private iAuthUrl: string) {
     }
 
     ngOnInit() {
@@ -81,7 +94,7 @@ export class LoginComponent implements OnInit, CanActivate {
     }
 
     canActivate(): boolean {
-      if (this.loginService.isLoggedIn('foo', 'foo1')) {
+      if (this.loginService.isLoggedIn('foo', 'foo1', this.iAuthUrl)) {
         return true;
       } else {
         this.router.navigate(['/login']);
@@ -92,7 +105,7 @@ export class LoginComponent implements OnInit, CanActivate {
 
     onSubmit(): void {
       console.log(`Inside onSubmit() with username ${this.username} and password ${this.password}`);
-      let loggedIn = this.loginService.isLoggedIn(this.username, this.password);
+      let loggedIn = this.loginService.isLoggedIn(this.username, this.password, this.iAuthUrl);
       console.log(`Logged in: ${loggedIn}`);
       if (loggedIn) {
           this.router.navigate(['/home']);
