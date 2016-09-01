@@ -3,7 +3,9 @@ import { SearchbarService } from './searchbar.service';
 
 describe('SearchbarService', () => {
   beforeEach(() => {
-    TestBed.configureTestingModule({providers:[SearchbarService]});
+    TestBed.configureTestingModule({
+      providers:[SearchbarService]
+    });
   });
 
   it('should create an instance',
