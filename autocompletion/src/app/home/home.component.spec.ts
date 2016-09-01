@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TestBed, inject, addProviders } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
 
 // Load the implementations that should be tested
 import { HomeComponent } from './home.component';
@@ -8,9 +8,11 @@ describe('HomeComponent', () => {
   const html = '<my-home></my-home>';
 
   beforeEach(() => {
-    TestBed.configureTestingModule({declarations: [HomeComponent, TestComponent]});
+    TestBed.configureTestingModule({
+      declarations: [HomeComponent, TestComponent],
+      providers: [HomeComponent]
+    });
     TestBed.overrideComponent(TestComponent, { set: { template: html }});
-     addProviders([HomeComponent]);
   });
 
   it('should log ngOnInit', inject([HomeComponent], (home) => {

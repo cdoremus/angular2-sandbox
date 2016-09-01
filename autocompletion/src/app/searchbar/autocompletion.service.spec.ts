@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-variable */
 
-import { addProviders, async, inject } from '@angular/core/testing';
+import { async, inject, TestBed } from '@angular/core/testing';
 import { AutocompletionService } from './autocompletion.service';
 
 import { BaseRequestOptions, Http } from '@angular/http';
@@ -8,7 +8,7 @@ import { MockBackend } from '@angular/http/testing';
 
 describe('AutocompletionService', () => {
   beforeEach(() => {
-    addProviders([
+    TestBed.configureTestingModule({providers:[
       AutocompletionService,
       BaseRequestOptions,
       MockBackend,
@@ -20,7 +20,7 @@ describe('AutocompletionService', () => {
           return new Http(backend, defaultOptions);
         }
       }
-      ]);
+      ]});
   });
 
   it('should create an instance of AutocompletionService',

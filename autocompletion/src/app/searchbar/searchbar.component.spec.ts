@@ -2,7 +2,7 @@
 
 import { By }           from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { addProviders, async, inject } from '@angular/core/testing';
+import { TestBed, async, inject } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { BaseRequestOptions, Http } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
@@ -13,7 +13,7 @@ import { AutocompletionService } from './autocompletion.service';
 describe('SearchbarComponent', () => {
 
     beforeEach(() => {
-    addProviders([
+    TestBed.configureTestingModule({providers:[
       FormBuilder,
       AutocompletionService,
       BaseRequestOptions,
@@ -26,7 +26,7 @@ describe('SearchbarComponent', () => {
           return new Http(backend, defaultOptions);
         }
       }
-      ])
+      ]});
     });
   it('should create an instance',
     inject([FormBuilder, AutocompletionService, Http],

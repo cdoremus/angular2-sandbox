@@ -1,9 +1,9 @@
-import { addProviders, inject } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
 import { SearchbarService } from './searchbar.service';
 
 describe('SearchbarService', () => {
   beforeEach(() => {
-    addProviders([SearchbarService]);
+    TestBed.configureTestingModule({providers:[SearchbarService]});
   });
 
   it('should create an instance',

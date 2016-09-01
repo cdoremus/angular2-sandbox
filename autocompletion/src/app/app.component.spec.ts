@@ -1,6 +1,6 @@
 import {
   inject,
-  addProviders
+  TestBed
 } from '@angular/core/testing';
 
 // to use Translate Service, we need Http, and to test Http we need to mock the backend
@@ -14,7 +14,7 @@ import { AppComponent } from './app.component';
 describe('App', () => {
   // provide our implementations or mocks to the dependency injector
   beforeEach(() => {
-    addProviders([
+    TestBed.configureTestingModule({providers:[
       AppComponent,
       ApiService,
       BaseRequestOptions,
@@ -27,7 +27,7 @@ describe('App', () => {
           return new Http(backend, defaultOptions);
         }
       }
-    ]);
+    ]});
   });
 
   it('should have an url', inject([AppComponent], (app: AppComponent) => {
