@@ -17,10 +17,9 @@ import { FormGroup, FormArray, FormBuilder, FormControl, Validators } from '@ang
     <button (click)="addQuestion()" >Add Question</button>
     <button type="submit">Submit</button>
 
-    <hr/>
     <div class="formValues">
-        <div>Question Form details:</div>
-        <pre>Is questionForm valid?: <br>{{questionForm.valid | json}}</pre>
+        <div>Question Form Details</div>
+        <pre>Is questionForm valid?: {{questionForm.valid | json}}</pre>
         <pre>form value: <br>{{questionForm.value | json}}</pre>
     </div>
   </form>
@@ -38,9 +37,12 @@ import { FormGroup, FormArray, FormBuilder, FormControl, Validators } from '@ang
       width: 300px;
       margin: auto;
     }
-    formValues {
-      border: black solid 2px;
-      margin-top: 10px;
+    .formValues {
+      border: 2px solid black;
+      margin: 20px auto;
+      padding: 5px;
+      width: 300px;
+
     }
   `
   ]
