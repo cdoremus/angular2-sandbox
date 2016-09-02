@@ -11,6 +11,7 @@ import { FormGroup, FormArray, FormBuilder, FormControl, Validators } from '@ang
         <fieldset [formGroupName]="i">
           <label>Question {{i + 1}}</label>
           <input type="text" formControlName="question"/>
+          <button (click)="deleteQuestion(i)">Delete</button>
         </fieldset>
       </div>
     </div>
