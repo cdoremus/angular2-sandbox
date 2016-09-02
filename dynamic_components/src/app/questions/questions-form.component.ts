@@ -92,6 +92,7 @@ export class QuestionFormComponent implements OnInit {
 
    save(formModel) {
      console.log('Question Form: ', formModel);
+     console.log('Questions array: ', formModel.value.questions);
    }
 }
 
