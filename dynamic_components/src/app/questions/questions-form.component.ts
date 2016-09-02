@@ -34,6 +34,10 @@ import { FormGroup, FormArray, FormBuilder, FormControl, Validators } from '@ang
       font-weight: bold;
       font-size: 16px;
     }
+    fieldset {
+      width: 300px;
+      margin: auto;
+    }
     formValues {
       border: black solid 2px;
       margin-top: 10px;
