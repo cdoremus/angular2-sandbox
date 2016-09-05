@@ -29,5 +29,9 @@ npm run start:hmr
 ```
 ### Then browse to the following URL: [http://localhost:8080/](http://localhost:8080/)
 
+See the
+[Dockerfile](https://github.com/cdoremus/angular2-sandbox/tree/dynamic-form/dynamic-form/Dockerfile)
+for instructions on how to run the application in a Docker container.
+
 #### This project is based on the [angular2-webpack-starter](https://github.com/preboot/angular2-webpack/) project
 
