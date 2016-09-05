@@ -5,10 +5,9 @@ import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { AppComponent }   from './app.component';
 import { ApiService } from './shared';
-import { AboutComponent } from './about/about.component';
-import { HomeComponent } from './home/home.component';
-import { SearchbarComponent } from './searchbar/searchbar.component';
-import { AutocompletionService } from './searchbar/autocompletion.service';
+import { AboutComponent } from './about';
+import { HomeComponent } from './home';
+import { SearchbarComponent, AutocompletionService } from './searchbar';
 import { routes } from './app.routes';
 
 @NgModule({
