@@ -1,4 +1,4 @@
-# angular2-webpack dynamic_components branch
+# angular2-webpack dynamic-form branch
 
 [![Dependency Status](https://david-dm.org/preboot/angular2-webpack/status.svg)](https://david-dm.org/preboot/angular2-webpack#info=dependencies) [![devDependency Status](https://david-dm.org/preboot/angular2-webpack/dev-status.svg)](https://david-dm.org/preboot/angular2-webpack#info=devDependencies)
 
