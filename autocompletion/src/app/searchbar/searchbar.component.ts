@@ -32,16 +32,15 @@ const enum KeyCode {
 })
 export class SearchbarComponent implements OnInit {
   suggestions: Array<string>; /// make this an input
-  searchTerm: string;
   dropdownStyle: any;
   isTermSelected = false;
   termSelected: Object = {};
+  personSelected: Object = {};
   searchInput: FormControl = new FormControl();
+  searchButtonIndex: number = -1;
 
   constructor(private autocompletionService: AutocompletionService) {
-    // console.log("SearchbarComponent constructor called");
     this.suggestions = [];
-
     this.searchInput.valueChanges
       .debounceTime(AUTOCOMPLETION_DELAY)
       .distinctUntilChanged()
@@ -58,6 +57,7 @@ export class SearchbarComponent implements OnInit {
                   let results = data.filter(person => person['name'].toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
                   console.log('Filtered search results:', results);
                   this.suggestions = results;
+                  this.searchButtonIndex = this.suggestions.length + 2;
                 },
                 error => {
                   console.log('Error doing autocompletion search', error);
@@ -76,24 +76,22 @@ export class SearchbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    // console.log("SearchbarComponent.ngOnInit() called");
-    this.searchTerm = '';
     this.dropdownStyle = {display: 'none'};
   }
 
-  suggestionSelected(suggestion: string) {
+  suggestionSelected(suggestion: string, searchTermInput) {
     this.isTermSelected = true;
     this.termSelected = suggestion;
     this.searchInput.setValue(suggestion['name']);
     this.dropdownStyle = {display: 'none'};
+    this.searchButtonIndex = 2;
+    searchTermInput.focus();
   }
 
-  itemSelected(event, suggestion) {
-    // console.log('Item selected with event', event);
-    // console.log(`${event.code} key selected`);
+  itemSelected(event, suggestion, searchTermInput) {
     switch (event.keyCode) {
       case KeyCode.Enter: // code=13
-        this.suggestionSelected(suggestion);
+        this.suggestionSelected(suggestion, searchTermInput);
         break;
       case KeyCode.ArrowUp: // code=38
         // move to previous li on down arrow (if one exists)
@@ -113,7 +111,8 @@ export class SearchbarComponent implements OnInit {
   }
 
   inputKeydown(event) {
-    // console.log('Input keydown event', event);
+    console.log("inputKeydown event:", event);
+
     // move to first li on down arrow (if one exists)
     let sibling = event.target.nextElementSibling;
     if (event.keyCode === KeyCode.ArrowDown && sibling) {
@@ -121,5 +120,10 @@ export class SearchbarComponent implements OnInit {
         sibling.children[0].focus();
       }
     }
+  }
+
+  search(event) {
+    console.log(`Person selected:`, this.termSelected);
+    this.personSelected = this.termSelected;
   }
 }

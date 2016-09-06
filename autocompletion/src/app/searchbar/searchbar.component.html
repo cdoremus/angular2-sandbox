@@ -5,15 +5,22 @@
       <div class="autocomplete">
         <input type="text" id="autocompletionInput" class="sb-input"
           placeholder="Enter search term" [formControl]="searchInput"
-          tabindex="1" (keydown)="inputKeydown($event)"/>
+          tabindex="1" #searchTermInput (keydown)="inputKeydown($event)"/>
         <ul id="autcompletionDropdown" [ngStyle]="dropdownStyle">
           <li *ngFor="let suggestion of suggestions; let i = index"
             (click)="suggestionSelected(suggestion)" tabindex="{{i + 2}}"
-            (keydown)="itemSelected($event, suggestion)">
+            (keydown)="itemSelected($event, suggestion, searchTermInput)">
             {{suggestion.name}}
           </li>
         </ul>
       </div>
-      <input type="submit" class="sb-button" value="Search" />
   </form>
+      <button type="submit" class="sb-button" (click)="search($event)"
+        tabindex="{{searchButtonIndex}}">Search</button>
+</div>
+
+<hr />
+<div class="termSelected">
+    <div>Person searched after Search is clicked:</div>
+    <pre>{{personSelected | json}}</pre>
 </div>

@@ -1,5 +1,19 @@
+hr {
+  width: 40%;
+  margin-top: 20px;
+}
+
 .sb-button {
     /*width: 30%;*/
     font-size: 25px;
     margin-top: 10px;
+}
+
+:focus {
+  border:1px solid grey;
+}
+
+.termSelected {
+  margin: 20px auto;
+  width: 200px;
 }
