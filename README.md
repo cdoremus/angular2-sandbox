@@ -7,5 +7,6 @@ Holds my Angular 2 experiments/examples
 
 [access-control-routing branch holding experiments with access control in Angular 2 routing](https://github.com/cdoremus/angular2-sandbox/tree/access-control-routing)
 
-[form-select-master branch holding experiments with Angular 2 form select component](https://github.com/cdoremus/angular2-sandbox/tree/form-select-master)
+[form-select-master branch holding experiments with Angular 2 a form select (dropdown) component and other custom components](https://github.com/cdoremus/angular2-sandbox/tree/form-select-master)
 
+[routing branch holding experiments with Angular 2 routing](https://github.com/cdoremus/angular2-sandbox/tree/routing)
