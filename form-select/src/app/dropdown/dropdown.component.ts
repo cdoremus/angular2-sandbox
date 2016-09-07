@@ -2,8 +2,8 @@ import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'dropdown',
-  styles: ['./dropdown.scss'],
-  template: './dropdown.html'
+  styles: ['./dropdown.component.scss'],
+  template: './dropdown.component.html'
 })
 export class DropdownComponent implements OnInit {
   @Input() label: string = '';

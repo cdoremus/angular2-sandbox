@@ -1,16 +1,10 @@
 import {Component, OnInit, AfterContentChecked, AfterViewChecked} from '@angular/core';
-//import {FORM_DIRECTIVES} from '@angular/forms';
-import {DropdownComponent} from '../dropdown/dropdown.component';
-import {MessagesComponent} from '../messages/messages.component';
-import {ButtonComponent} from '../button/button.component';
 import Message from '../messages/message';
 
 @Component({
   selector: 'home',
-  directives: [DropdownComponent, MessagesComponent, ButtonComponent],
-  pipes: [],
-  styles: [require('./home.scss')],
-  template: require('./home.html')
+  styles: ['./home.scss'],
+  template: './home.html'
 })
 export class HomeComponent implements OnInit, AfterContentChecked, AfterViewChecked {
   superlative_options: string[] = ['good', 'better', 'best', 'extra-ordinary', 'awesome'];

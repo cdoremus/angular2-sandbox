@@ -3,11 +3,8 @@ import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'button',
-  template: require('./button.html'),
-  styles: [require('./button.scss')],
-  providers: [],
-  directives: [],
-  pipes: []
+  template: './button.component.html',
+  styles: ['./button.component.scss']
 })
 export class ButtonComponent implements OnInit {
   @Input() public label: string = '';
