@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 
 @Injectable()
-export class Api {
+export class ApiService {
   public title: string = 'Angular 2';
 }

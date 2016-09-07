@@ -3,10 +3,8 @@ import Message from './message';
 
 @Component({
   selector: 'messages',
-  template: require('./messages.html'),
-  styles: [require('./messages.scss')],
-  providers: [],
-  pipes: []
+  template: './messages.html',
+  styles: ['./messages.scss']
 })
 export class MessagesComponent implements OnInit {
   @Input() public title: string;
