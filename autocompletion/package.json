@@ -8,7 +8,7 @@
     "clean-start": "npm run clean-install && npm start",
     "watch": "webpack --watch --progress --profile",
     "build": "rimraf dist && webpack --progress --profile --bail",
-    "server": "webpack-dev-server --inline --progress --port 8080",
+    "server": "webpack-dashboard -- webpack-dev-server --inline --progress --port 8080",
     "webdriver-update": "webdriver-manager update",
     "webdriver-start": "webdriver-manager start",
     "lint": "tslint --force \"src/**/*.ts\"",
@@ -20,6 +20,7 @@
     "ci": "npm run e2e && npm run test",
     "docs": "typedoc --options typedoc.json src/app/app.component.ts",
     "start": "npm run server",
+    "start:hmr": "npm run server -- --hot",
     "postinstall": "npm run webdriver-update && typings install"
   },
   "dependencies": {
@@ -37,6 +38,8 @@
     "zone.js": "0.6.17"
   },
   "devDependencies": {
+    "@angularclass/hmr": "^1.0.1",
+    "@angularclass/hmr-loader": "^1.0.0",
     "angular2-template-loader": "^0.4.0",
     "autoprefixer": "^6.3.2",
     "codelyzer": "0.0.26",
@@ -50,7 +53,7 @@
     "jasmine-core": "^2.3.4",
     "jasmine-spec-reporter": "^2.4.0",
     "json-loader": "^0.5.3",
-    "karma": "1.1.1",
+    "karma": "1.1.2",
     "karma-chrome-launcher": "^1.0.1",
     "karma-coverage": "^1.0.0",
     "karma-jasmine": "^1.0.2",
@@ -79,6 +82,7 @@
     "typings": "^1.0.4",
     "url-loader": "^0.5.6",
     "webpack": "^1.12.13",
+    "webpack-dashboard": "^0.1.8",
     "webpack-dev-server": "^1.14.1"
   }
 }

@@ -8,6 +8,7 @@ var autoprefixer = require('autoprefixer');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var DashboardPlugin = require('webpack-dashboard/plugin');
 
 /**
  * Env
@@ -87,7 +88,7 @@ module.exports = function makeWebpackConfig() {
       // Support for .ts files.
       {
         test: /\.ts$/,
-        loaders: ['ts', 'angular2-template-loader'],
+        loaders: ['ts', 'angular2-template-loader', '@angularclass/hmr-loader'],
         exclude: [isTest ? /\.(e2e)\.ts$/ : /\.(spec|e2e)\.ts$/, /node_modules\/(?!(ng2-.+))/]
       },
 
@@ -161,6 +162,11 @@ module.exports = function makeWebpackConfig() {
       }
     })
   ];
+
+
+  if (!isTest && !isProd) {
+      config.plugins.push(new DashboardPlugin());
+  }
 
   if (!isTest) {
     config.plugins.push(
