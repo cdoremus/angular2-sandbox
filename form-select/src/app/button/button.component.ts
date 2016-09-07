@@ -2,7 +2,7 @@ import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 //import {FORM_DIRECTIVES} from '@angular/forms';
 
 @Component({
-  selector: 'button',
+  selector: 'my-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss']
 })
