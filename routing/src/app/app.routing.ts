@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
+  // defines a path to the router-outlet that displays a dialog via the DialogComponent class
   { path: 'dialog-path', component: DialogComponent, outlet: 'dialog' }
 ];
 
