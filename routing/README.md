@@ -4,6 +4,16 @@
 
 This branch is designed to demonstrate routing alternatives in Angular 2.
 
+### Auxlliary Routes
+
+The DialogComponent is an example of a component that displays a popup dialog using an auxilliary route.
+
+The dialog is displayed using the router-outlet element with a name attribute
+and a hyperlink to show the dialog uses a specially configured routerLink directive
+(see [app.component.html](https://github.com/cdoremus/angular2-sandbox/tree/routing/routing/src/app/app.component.html)).
+The route is configured in [app.routing.ts](https://github.com/cdoremus/angular2-sandbox/tree/routing/routing/src/app/app.routing.ts).
+
+
 ### Building and Running the App
 
 Build and run the application using the following commands:
