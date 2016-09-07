@@ -1,5 +1,5 @@
 # angular2-sandbox form-select-master branch
-Holds experiments with Angular 2 forms -- especially the select element -- and routing. This currently uses Angular 2.0 RC4.
+Holds experiments with Angular 2 forms -- especially the select element -- and routing. This currently uses Angular 2.0 RC6.
 
 ```bash
 #Use the following command to install the code dependencies:
