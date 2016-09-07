@@ -16,7 +16,7 @@ describe('Button Component', () => {
     expect(component.label).toBeDefined();
   });
 
-  it('should set label on template', async() => {
+  it('should set label on template', () => {
 
     TestBed.compileComponents().then(() => {
       let label = 'foobar';
@@ -31,7 +31,7 @@ describe('Button Component', () => {
     })
   });
 
-  it('button click should call ButtonComponentonClick()', async() => {
+  it('button click should call ButtonComponentonClick()', () => {
     TestBed.compileComponents().then(() => {
       const fixture = TestBed.createComponent(ButtonComponent);
       let component: ButtonComponent = fixture.debugElement.componentInstance;

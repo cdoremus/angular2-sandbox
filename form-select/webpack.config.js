@@ -1,4 +1,4 @@
-// Helper: root(), and rootDir() are defined at the bottom
+// Helper: root() is defined at the bottom
 var path = require('path');
 var webpack = require('webpack');
 
@@ -8,6 +8,7 @@ var autoprefixer = require('autoprefixer');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var DashboardPlugin = require('webpack-dashboard/plugin');
 
 /**
  * Env
@@ -30,9 +31,7 @@ module.exports = function makeWebpackConfig() {
    * Reference: http://webpack.github.io/docs/configuration.html#devtool
    * Type of sourcemap to use per build type
    */
-  if (isTest) {
-    config.devtool = 'inline-source-map';
-  } else if (isProd) {
+  if (isProd) {
     config.devtool = 'source-map';
   } else {
     config.devtool = 'eval-source-map';
@@ -89,21 +88,15 @@ module.exports = function makeWebpackConfig() {
       // Support for .ts files.
       {
         test: /\.ts$/,
-        loader: 'ts',
-        query: {
-          'ignoreDiagnostics': [
-            2403, // 2403 -> Subsequent variable declarations
-            2300, // 2300 -> Duplicate identifier
-            2374, // 2374 -> Duplicate number index signature
-            2375, // 2375 -> Duplicate string index signature
-            2502  // 2502 -> Referenced directly or indirectly
-          ]
-        },
+        loaders: ['ts', 'angular2-template-loader', '@angularclass/hmr-loader'],
         exclude: [isTest ? /\.(e2e)\.ts$/ : /\.(spec|e2e)\.ts$/, /node_modules\/(?!(ng2-.+))/]
       },
 
       // copy those assets to output
-      {test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/, loader: 'file?name=fonts/[name].[hash].[ext]?'},
+      {
+        test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file?name=fonts/[name].[hash].[ext]?'
+      },
 
       // Support for *.json files.
       {test: /\.json$/, loader: 'json'},
@@ -132,20 +125,28 @@ module.exports = function makeWebpackConfig() {
 
       // support for .html as raw text
       // todo: change the loader to something that adds a hash to images
-      {test: /\.html$/, loader: 'raw'}
+      {test: /\.html$/, loader: 'raw',  exclude: root('src', 'public')}
     ],
-    postLoaders: [],
-    noParse: [/.+zone\.js\/dist\/.+/, /.+angular2\/bundles\/.+/, /angular2-polyfills\.js/]
+    postLoaders: []
   };
 
   if (isTest) {
-    // instrument only testing sources with Istanbul, covers js compiled files for now :-/
+    // instrument only testing sources with Istanbul, covers ts files
     config.module.postLoaders.push({
-      test: /\.(js|ts)$/,
+      test: /\.ts$/,
       include: path.resolve('src'),
       loader: 'istanbul-instrumenter-loader',
       exclude: [/\.spec\.ts$/, /\.e2e\.ts$/, /node_modules/]
-    })
+    });
+
+    // needed for remap-instanbul
+    config.ts = {
+      compilerOptions: {
+        sourceMap: false,
+        sourceRoot: './src',
+        inlineSourceMap: true
+      }
+    };
   }
 
   /**
@@ -164,6 +165,10 @@ module.exports = function makeWebpackConfig() {
     })
   ];
 
+  if (!isTest && !isProd) {
+      config.plugins.push(new DashboardPlugin());
+  }
+
   if (!isTest) {
     config.plugins.push(
       // Generate common chunks if necessary
@@ -177,8 +182,7 @@ module.exports = function makeWebpackConfig() {
       // Reference: https://github.com/ampedandwired/html-webpack-plugin
       new HtmlWebpackPlugin({
         template: './src/public/index.html',
-        inject: 'body',
-        chunksSortMode: packageSort(['polyfills', 'vendor', 'app'])
+        chunksSortMode: 'dependency'
       }),
 
       // Extract css files
@@ -201,11 +205,7 @@ module.exports = function makeWebpackConfig() {
 
       // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
       // Minify all javascript, switch loaders to minimizing mode
-      new webpack.optimize.UglifyJsPlugin({
-        // Angular 2 is broken again, disabling mangle until beta 6 that should fix the thing
-        // Todo: remove this with beta 6
-        mangle: false
-      }),
+      new webpack.optimize.UglifyJsPlugin({mangle: { keep_fnames: true }}),
 
       // Copy assets from the public folder
       // Reference: https://github.com/kevlened/copy-webpack-plugin
@@ -252,6 +252,7 @@ module.exports = function makeWebpackConfig() {
   config.devServer = {
     contentBase: './src/public',
     historyApiFallback: true,
+    quiet: true,
     stats: 'minimal' // none (or false), errors-only, minimal, normal (or true) and verbose
   };
 
@@ -262,32 +263,4 @@ module.exports = function makeWebpackConfig() {
 function root(args) {
   args = Array.prototype.slice.call(arguments, 0);
   return path.join.apply(path, [__dirname].concat(args));
-}
-
-function rootNode(args) {
-  args = Array.prototype.slice.call(arguments, 0);
-  return root.apply(path, ['node_modules'].concat(args));
-}
-
-function packageSort(packages) {
-  // packages = ['polyfills', 'vendor', 'app']
-  var len = packages.length - 1;
-  var first = packages[0];
-  var last = packages[len];
-  return function sort(a, b) {
-    // polyfills always first
-    if (a.names[0] === first) {
-      return -1;
-    }
-    // main always last
-    if (a.names[0] === last) {
-      return 1;
-    }
-    // vendor before app
-    if (a.names[0] !== first && b.names[0] === last) {
-      return -1;
-    } else {
-      return 1;
-    }
-  }
 }

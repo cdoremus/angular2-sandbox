@@ -18,7 +18,7 @@ describe('Messages Component', () => {
   });
 
 
-  it('should match "title" property in template when overriding template', async() => {
+  it('should match "title" property in template when overriding template', () => {
     TestBed.overrideComponent(MessagesComponent, {
         set: { template: html }
     });
