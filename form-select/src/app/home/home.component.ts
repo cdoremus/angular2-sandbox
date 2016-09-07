@@ -3,8 +3,8 @@ import Message from '../messages/message';
 
 @Component({
   selector: 'home',
-  styles: ['./home.scss'],
-  template: './home.html'
+  styleUrls: ['./home.component.scss'],
+  templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit, AfterContentChecked, AfterViewChecked {
   superlative_options: string[] = ['good', 'better', 'best', 'extra-ordinary', 'awesome'];
