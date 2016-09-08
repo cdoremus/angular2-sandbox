@@ -13,6 +13,8 @@ and a hyperlink to show the dialog uses a specially configured routerLink direct
 (see [app.component.html](https://github.com/cdoremus/angular2-sandbox/tree/routing/routing/src/app/app.component.html)).
 The route is configured in [app.routing.ts](https://github.com/cdoremus/angular2-sandbox/tree/routing/routing/src/app/app.routing.ts).
 
+#### Dialog Screenshot
+![display-dialog-screenshot](screenshots/displayed-dialog-screenshot.png "")
 
 ### Building and Running the App
 
