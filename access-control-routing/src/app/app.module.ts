@@ -1,22 +1,20 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 
+import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent, USER_AUTH_URL, authUrl } from './login/login.component';
 import { LoginLinkComponent } from './login/login-link.component';
 import { LoginService } from './login/login.service';
 import { AuthenticationTokenProvider } from './login/authentication-token';
 import { LocalAuthTokenProvider } from './login/local-auth-token-provider';
 import { ApiService } from './shared';
 import { routing } from './app.routing';
-
-// Change based on local vs remote calls and deployment location
-export const USER_AUTH_URL = 'AUTH_URL';
-export const authUrl = './users.json';
 
 @NgModule({
   imports: [
@@ -41,4 +39,21 @@ export const authUrl = './users.json';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+  constructor(public appRef: ApplicationRef) {}
+  hmrOnInit(store) {
+    console.log('HMR store', store);
+  }
+  hmrOnDestroy(store) {
+    let cmpLocation = this.appRef.components.map(cmp => cmp.location.nativeElement);
+    // recreate elements
+    store.disposeOldHosts = createNewHosts(cmpLocation);
+    // remove styles
+    removeNgStyles();
+  }
+  hmrAfterDestroy(store) {
+    // display new elements
+    store.disposeOldHosts();
+    delete store.disposeOldHosts;
+  }
+}

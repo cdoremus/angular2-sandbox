@@ -5,8 +5,7 @@ import { NavigationService } from './navigation.service';
 @Component({
   selector: 'navigation',
   styleUrls: ['./navigation.component.scss'],
-  templateUrl: './navigation.component.html',
-  providers: [LoginService] //NavigationService provided in main.ts
+  templateUrl: './navigation.component.html'
 })
 export class NavigationComponent implements OnInit {
   loginLinkText: string = 'Login';

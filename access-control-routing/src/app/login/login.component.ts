@@ -1,9 +1,12 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
-import { USER_AUTH_URL } from '../app.module';
 import { LoginService } from './login.service';
 import { AuthenticationTokenProvider } from './authentication-token';
 import { LocalAuthTokenProvider } from './local-auth-token-provider';
+
+// Change based on local vs remote calls and deployment location
+export const USER_AUTH_URL = 'AUTH_URL';
+export const authUrl = './users.json';
 
 
 @Component({

@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { AuthenticationTokenProvider } from './authentication-token';
 
 
 /**
@@ -18,10 +20,13 @@ import { Router } from '@angular/router';
         <a class="login-link" (click)="linkClicked()">{{linkText}}</a>
     `
 })
-export class LoginLinkComponent {
+export class LoginLinkComponent implements OnInit {
     linkText: string;
 
-    constructor(private router: Router) {
+    constructor(private router: Router,  private authTokenProvider: AuthenticationTokenProvider) {
+    }
+
+    ngOnInit() {
         this.linkText = 'Login';
     }
 
@@ -32,6 +37,7 @@ export class LoginLinkComponent {
                 this.linkText = 'Logout';
                 break;
             case 'Logout':
+                this.authTokenProvider.removeToken();
                 this.linkText = 'Login';
                 break;
             default:
