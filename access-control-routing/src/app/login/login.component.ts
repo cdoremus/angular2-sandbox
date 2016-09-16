@@ -85,7 +85,7 @@ export class LoginComponent implements OnInit, CanActivate {
     }
 
     canActivate(): boolean {
-      if (this.loginService.isLoggedIn('foo', 'foo1', this.iAuthUrl)) {
+      if (this.loginService.isLoggedIn(this.username, this.password, this.iAuthUrl)) {
         return true;
       } else {
         this.router.navigate(['/login']);
