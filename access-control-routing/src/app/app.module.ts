@@ -6,12 +6,17 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
-import { LoginComponent, USER_AUTH_URL, authUrl } from './login/login.component';
+import { LoginComponent } from './login/login.component';
+import { LoginLinkComponent } from './login/login-link.component';
 import { LoginService } from './login/login.service';
 import { AuthenticationTokenProvider } from './login/authentication-token';
 import { LocalAuthTokenProvider } from './login/local-auth-token-provider';
 import { ApiService } from './shared';
 import { routing } from './app.routing';
+
+// Change based on local vs remote calls and deployment location
+export const USER_AUTH_URL = 'AUTH_URL';
+export const authUrl = './users.json';
 
 @NgModule({
   imports: [
@@ -24,7 +29,8 @@ import { routing } from './app.routing';
     AppComponent,
     HomeComponent,
     AboutComponent,
-    LoginComponent
+    LoginComponent,
+    LoginLinkComponent
   ],
   providers: [
     {provide: LoginComponent, useClass: LoginComponent},

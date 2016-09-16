@@ -1,10 +1,10 @@
-import { RouterModule, RouterConfig } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './home';
 import { AboutComponent } from './about';
 import { LoginComponent } from './login/login.component';
 
-const routes: RouterConfig = [
+const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [LoginComponent] },

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 import { LoginService } from '../login/login.service';
 import { NavigationService } from './navigation.service';
 
@@ -7,7 +6,6 @@ import { NavigationService } from './navigation.service';
   selector: 'navigation',
   styleUrls: ['./navigation.component.scss'],
   templateUrl: './navigation.component.html',
-  directives: [ ...ROUTER_DIRECTIVES ],
   providers: [LoginService] //NavigationService provided in main.ts
 })
 export class NavigationComponent implements OnInit {
