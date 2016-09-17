@@ -1,6 +1,6 @@
 ## angular2-sandbox access-control-routing branch
 
-# This is an Angular 2 project used to experiment with access control routing
+# This is an Angular 2 project used to experiment with access control routing guards
 
 [![Dependency Status](https://david-dm.org/preboot/angular2-webpack/status.svg)](https://david-dm.org/preboot/angular2-webpack#info=dependencies) [![devDependency Status](https://david-dm.org/preboot/angular2-webpack/dev-status.svg)](https://david-dm.org/preboot/angular2-webpack#info=devDependencies)
 
