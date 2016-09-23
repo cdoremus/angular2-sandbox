@@ -33,4 +33,17 @@ describe('Home', function () {
     expect(list.get(0).getText()).toEqual('good');
     expect(list.get(1).getText()).toEqual('first');
   });
+
+  it('should change displayed messages when both drop downs are selected', function () {
+    var dd1option3 = element.all(by.css('form > div:nth-child(1) > div > dropdown > div > select > option')).get(2);
+    dd1option3.click();
+    var dd2option2 = element.all(by.css('form > div:nth-child(2) > div > dropdown > div > select > option')).get(1);
+    dd2option2.click();
+    var button = element(by.css('button'));
+    expect(button.isPresent()).toEqual(true);
+    button.click();
+    var list = element.all(by.css('.list-option'));
+    expect(list.get(0).getText()).toEqual('best');
+    expect(list.get(1).getText()).toEqual('second');
+  });
 });
