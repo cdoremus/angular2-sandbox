@@ -29,8 +29,8 @@ describe('Home', function () {
     var button = element(by.css('button'));
     expect(button.isPresent()).toEqual(true);
     button.click();
-    // used dev tools to fingure out the proper selectors
-    expect(element(by.css('#messages-border > div:nth-child(2) > div')).getText()).toEqual('good');
-    expect(element(by.css('#messages-border > div:nth-child(3) > div')).getText()).toEqual('first');
+    var list = element.all(by.css('.list-option'));
+    expect(list.get(0).getText()).toEqual('good');
+    expect(list.get(1).getText()).toEqual('first');
   });
 });
