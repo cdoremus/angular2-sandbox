@@ -5,9 +5,9 @@ describe('Home', function () {
   });
 
   it('should have <home>', function () {
-    var home = element(by.css('app home'));
+    var home = element(by.css('my-app home h2'));
     expect(home.isPresent()).toEqual(true);
-    expect(home.getText()).toEqual("Home Works!");
+    expect(home.getText()).toEqual("Fun with Select!");
   });
 
 });
