@@ -34,16 +34,18 @@ describe('Home', function () {
     expect(list.get(1).getText()).toEqual('first');
   });
 
-  it('should change displayed messages when both drop downs are selected', function () {
-    var dd1option3 = element.all(by.css('form > div:nth-child(1) > div > dropdown > div > select > option')).get(2);
+  it('should display correct messages when both drop downs are selected', function () {
+    var option1text = 'best';
+    var option2text = 'second';
+    var dd1option3 = element(by.cssContainingText('option', option1text));
     dd1option3.click();
-    var dd2option2 = element.all(by.css('form > div:nth-child(2) > div > dropdown > div > select > option')).get(1);
+    var dd2option2 = element(by.cssContainingText('option', option2text));
     dd2option2.click();
     var button = element(by.css('button'));
     expect(button.isPresent()).toEqual(true);
     button.click();
     var list = element.all(by.css('.list-option'));
-    expect(list.get(0).getText()).toEqual('best');
-    expect(list.get(1).getText()).toEqual('second');
+    expect(list.get(0).getText()).toEqual(option1text);
+    expect(list.get(1).getText()).toEqual(option2text);
   });
 });
