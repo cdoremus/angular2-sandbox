@@ -52,18 +52,18 @@ export const authUrl = './users.json';
   `],
   template: `
         <div class="login-form-container login-form-font">
-            <form #form="ngForm" (ngSubmit)="onSubmit()" method="post">
+            <form #form="ngForm" (ngSubmit)="onSubmit(form.value)" method="post">
               <fieldset class="form-container">
                 <legend>Please login</legend>
                     <fieldset>
                         <label class="form-label">User name:</label>
                         <input type="text" class="text-input login-form-font" name="username"
-                          placeholder="Enter user name" tabindex="1" [(ngModel)]="username" />
+                          placeholder="Enter user name" tabindex="1" ngModel/>
                     </fieldset>
                     <fieldset>
                         <label class="form-label">Password:</label>
                         <input type="password" class="text-input login-form-font" name="password"
-                          placeholder="Enter password" tabindex="2" [(ngModel)]="password"/>
+                          placeholder="Enter password" tabindex="2" ngModel/>
                     </fieldset>
                     <div class="submit-container">
                         <input type="submit" class="login-button login-form-font" tabindex="3" value="Login" />
@@ -96,9 +96,9 @@ export class LoginComponent implements OnInit, CanActivate {
       }
     }
 
-    onSubmit(): void {
-      console.log(`Inside onSubmit() with username ${this.username} and password ${this.password}`);
-      let loggedIn = this.loginService.isLoggedIn(this.username, this.password, this.iAuthUrl);
+    onSubmit(form): void {
+      console.log(`Inside onSubmit() with username ${form.username} and password ${form.password}`);
+      let loggedIn = this.loginService.isLoggedIn(form.username, form.password, this.iAuthUrl);
       console.log(`Logged in: ${loggedIn}`);
       if (loggedIn) {
           this.router.navigate(['/home']);
