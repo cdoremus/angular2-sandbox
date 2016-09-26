@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import { Router, CanActivate } from '@angular/router';
+import { Router } from '@angular/router';
 import { LoginService } from './login.service';
-import { AuthenticationTokenProvider } from './authentication-token';
-import { LocalAuthTokenProvider } from './local-auth-token-provider';
 
 // Change based on local vs remote calls and deployment location
 export const USER_AUTH_URL = 'AUTH_URL';
@@ -73,13 +71,15 @@ export const authUrl = './users.json';
         </div>
   `
 })
-export class LoginComponent implements OnInit, CanActivate {
+export class LoginComponent implements OnInit {
     @Input() username: string;
     @Input() password: string;
+    loginMessage: string;
 
     constructor(
       private loginService: LoginService,
       private router: Router,
+    //   private activatedRoute: ActivatedRoute,
       @Inject(USER_AUTH_URL) private iAuthUrl: string) {
     }
 
@@ -87,21 +87,14 @@ export class LoginComponent implements OnInit, CanActivate {
       console.log('Inside ngOnInit()');
     }
 
-    canActivate(): boolean {
-      if (this.loginService.isLoggedIn(this.username, this.password, this.iAuthUrl)) {
-        return true;
-      } else {
-        this.router.navigate(['/login']);
-        return false;
-      }
-    }
 
     onSubmit(form): void {
       console.log(`Inside onSubmit() with username ${form.username} and password ${form.password}`);
-      let loggedIn = this.loginService.isLoggedIn(form.username, form.password, this.iAuthUrl);
-      console.log(`Logged in: ${loggedIn}`);
-      if (loggedIn) {
-          this.router.navigate(['/home']);
+    //   console.log('ActivatedRoute: ', this.activatedRoute);
+
+      this.loginMessage = this.loginService.login(form.username, form.password, this.iAuthUrl);
+      if (!this.loginMessage) {
+          this.router.navigate(['home']);
       }
     }
 }

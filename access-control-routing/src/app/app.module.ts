@@ -11,6 +11,7 @@ import { AboutComponent } from './about/about.component';
 import { LoginComponent, USER_AUTH_URL, authUrl } from './login/login.component';
 import { LoginLinkComponent } from './login/login-link.component';
 import { LoginService } from './login/login.service';
+import { LoginGuard } from './login/login.guard';
 import { AuthenticationTokenProvider } from './login/authentication-token';
 import { LocalAuthTokenProvider } from './login/local-auth-token-provider';
 import { ApiService } from './shared';
@@ -35,6 +36,7 @@ import { routing } from './app.routing';
     {provide: USER_AUTH_URL, useValue: authUrl},
     ApiService,
     LoginService,
+    LoginGuard,
     {provide: AuthenticationTokenProvider, useClass: LocalAuthTokenProvider}
   ],
   bootstrap: [AppComponent]
