@@ -15,7 +15,8 @@ export class LoginGuard implements CanActivate {
         if (!ok) {
             this.router.navigate(['/login']);
         } else {
-            this.router.navigate([route.url[0].path]);
+            // NOTE: This causes a recursive tailspin!!
+            // this.router.navigate([route.url[0].path]);
         }
         return ok;
     }
