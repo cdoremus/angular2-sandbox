@@ -79,7 +79,6 @@ export class LoginComponent implements OnInit {
     constructor(
       private loginService: LoginService,
       private router: Router,
-    //   private activatedRoute: ActivatedRoute,
       @Inject(USER_AUTH_URL) private iAuthUrl: string) {
     }
 
@@ -90,7 +89,6 @@ export class LoginComponent implements OnInit {
 
     onSubmit(form): void {
       console.log(`Inside onSubmit() with username ${form.username} and password ${form.password}`);
-    //   console.log('ActivatedRoute: ', this.activatedRoute);
 
       this.loginMessage = this.loginService.login(form.username, form.password, this.iAuthUrl);
       if (!this.loginMessage) {
