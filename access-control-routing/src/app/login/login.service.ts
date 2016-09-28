@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy} from '@angular/core';
 import { Http } from '@angular/http';
 import {Subject, Observable} from 'rxjs';
 
@@ -7,12 +7,18 @@ import { AuthenticationTokenProvider } from './authentication-token';
 
 
 @Injectable()
-export class LoginService {
+export class LoginService implements OnDestroy {
     loggedInSubject: Subject<boolean> = new Subject<boolean>();
 
     constructor(
       private authTokenProvider: AuthenticationTokenProvider,
       private http: Http) {}
+
+    ngOnDestroy() {
+        if (this.loggedInSubject) {
+            this.loggedInSubject.unsubscribe();
+        }
+    }
 
     isLoggedIn(): Observable<boolean> {
         return this.loggedInSubject.take(1);
