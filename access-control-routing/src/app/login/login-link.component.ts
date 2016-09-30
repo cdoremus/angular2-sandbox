@@ -1,8 +1,12 @@
 import { Component, OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { LoginService } from './login.service';
 import { AuthenticationTokenProvider } from './authentication-token';
 
+
+export const LOGIN_LINKTEXT = 'Login';
+export const LOGOUT_LINKTEXT = 'Logout';
 
 /**
  * Nav bar link for logging in.
@@ -23,22 +27,26 @@ import { AuthenticationTokenProvider } from './authentication-token';
 export class LoginLinkComponent implements OnInit {
     linkText: string;
 
-    constructor(private router: Router,  private authTokenProvider: AuthenticationTokenProvider) {
+    constructor(
+        private router: Router,
+        private loginService: LoginService,
+        private authTokenProvider: AuthenticationTokenProvider) {
     }
 
     ngOnInit() {
-        this.linkText = 'Login';
+        this.linkText = LOGIN_LINKTEXT;
     }
 
     linkClicked() {
         // toggle the link text
         switch (this.linkText) {
-            case 'Login':
-                this.linkText = 'Logout';
+            case LOGIN_LINKTEXT:
+                this.linkText = LOGOUT_LINKTEXT;
                 break;
-            case 'Logout':
+            case LOGOUT_LINKTEXT:
                 this.authTokenProvider.removeToken();
-                this.linkText = 'Login';
+                this.loginService.loggedInSubject.next(false);
+                this.linkText = LOGIN_LINKTEXT;
                 break;
             default:
                 console.error(`Unknown link: ${this.linkText}`);
