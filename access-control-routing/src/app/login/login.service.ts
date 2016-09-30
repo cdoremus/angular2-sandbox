@@ -66,6 +66,7 @@ export class LoginService implements OnInit, OnDestroy {
     }
 
     logout(): void {
+        this.loggedInSubject.next(false);
         this.authTokenProvider.removeToken();
     }
 }
