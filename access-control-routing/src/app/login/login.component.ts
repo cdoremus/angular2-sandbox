@@ -69,7 +69,7 @@ export const authUrl = './users.json';
               </fieldset>
             </form>
         </div>
-  `
+  `,
 })
 export class LoginComponent implements OnInit {
     @Input() username: string;
@@ -91,8 +91,11 @@ export class LoginComponent implements OnInit {
       console.log(`Inside onSubmit() with username ${form.username} and password ${form.password}`);
 
       this.loginMessage = this.loginService.login(form.username, form.password, this.iAuthUrl);
+
       if (!this.loginMessage) {
+          this.loginService.loggedInSubject.next(true);
           this.router.navigate(['home']);
       }
+      //TODO: Display message if it exists
     }
 }

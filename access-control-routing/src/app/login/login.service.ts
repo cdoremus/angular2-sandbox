@@ -1,38 +1,46 @@
-import { Injectable, OnDestroy} from '@angular/core';
-import { Http } from '@angular/http';
-import {Subject, Observable} from 'rxjs';
+import { Injectable, OnInit, OnDestroy} from '@angular/core';
+import { Http, Response } from '@angular/http';
+import {Subject, BehaviorSubject, Observable} from 'rxjs';
 
 import { AuthenticationTokenProvider } from './authentication-token';
 
 
 
 @Injectable()
-export class LoginService implements OnDestroy {
-    loggedInSubject: Subject<boolean> = new Subject<boolean>();
+export class LoginService implements OnInit, OnDestroy {
+    loggedInSubject: Subject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(
       private authTokenProvider: AuthenticationTokenProvider,
       private http: Http) {}
 
-    ngOnDestroy() {
+
+    ngOnInit(): void {
+    }
+
+    ngOnDestroy(): void {
         if (this.loggedInSubject) {
             this.loggedInSubject.unsubscribe();
         }
     }
 
     isLoggedIn(): Observable<boolean> {
-        return this.loggedInSubject.take(1);
-        // return this.authTokenProvider.getToken() ? true : false;
+        console.log('LoginService#isLoggedIn() called');
+        // return this.loggedInSubject.take(1);
+        let ok: Observable<boolean> = this.loggedInSubject.first();
+        ok.subscribe(v => console.log('LoginService#isLoggedIn() returning', v));
+        return ok;
     }
 
     login(username: string, password: string, authUrl: string): string {
+        console.log('LoginService#login() called');
         if (this.authTokenProvider.getToken()) {
             console.log('Token found');
             this.loggedInSubject.next(true);
             return undefined;
         } else {
            console.log('Token NOT found, looking up user');
-           this.http.get(authUrl)
+           this.getLoginCredentials(authUrl)
              .subscribe((response) => {
                 let data = response.json();
                 let found = data.filter(user => user.Username === username && user.Password === password);
@@ -51,6 +59,10 @@ export class LoginService implements OnDestroy {
                 }
            });
         }
+    }
+
+    private getLoginCredentials(authUrl: string): Observable<Response> {
+        return this.http.get(authUrl);
     }
 
     logout(): void {
