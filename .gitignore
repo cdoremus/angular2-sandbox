@@ -3,3 +3,4 @@ access-control-routing
 autocompletion
 dynamic-form
 .vscode
+*.log
