@@ -14,18 +14,10 @@ describe('Home', function () {
 
     // guard redirects to login component
     // login
-    var username = element(by.css("input[name='username']"));
-    username.sendKeys(luser);
-    var password = element(by.css("input[name='password']"));
-    password.sendKeys(lpass);
-    var login = element(by.css("input[type='submit']"));
-    // click Login button
-    login.click();
+    login();
 
     // redirected to home page after login
-    var home = element(by.css('my-app my-home'));
-    expect(home.isPresent()).toEqual(true);
-    expect(home.getText()).toEqual("Home Works!");
+    checkLogin();
 
     //goto the about page
     var aboutLink = element(by.css("a[href='/about']"));
@@ -39,4 +31,39 @@ describe('Home', function () {
 
   });
 
+  it('should be able to log out after logging in', function () {
+    // login
+    login();
+
+    // redirected to home page after login
+    checkLogin();
+
+    //check login link text in menu
+    var loginLink = element(by.css('.login-link'));
+    expect(loginLink.getText()).toEqual("Logout");
+    // logout
+    loginLink.click();
+    // check for login page (username input)
+    var username = element(by.css("input[name='username']"));
+    expect(username.isPresent()).toEqual(true);
+  // check that link text has changed
+    expect(loginLink.getText()).toEqual("Login");
+  });
+
+  function login() {
+    var username = element(by.css("input[name='username']"));
+    username.sendKeys(luser);
+    var password = element(by.css("input[name='password']"));
+    password.sendKeys(lpass);
+    var login = element(by.css("input[type='submit']"));
+    // click Login button
+    login.click();
+  }
+
+  function checkLogin() {
+    // redirected to home page after login
+    var home = element(by.css('my-app my-home'));
+    expect(home.isPresent()).toEqual(true);
+    expect(home.getText()).toEqual("Home Works!");
+  }
 });
