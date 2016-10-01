@@ -25,17 +25,16 @@ export class LoginService implements OnInit, OnDestroy {
     }
 
     isLoggedIn(): Observable<boolean> {
-        console.log('LoginService#isLoggedIn() called');
-        // return this.loggedInSubject.take(1);
+        // console.log('LoginService#isLoggedIn() called');
         let ok: Observable<boolean> = this.loggedInSubject.first();
         ok.subscribe(v => console.log('LoginService#isLoggedIn() returning', v));
         return ok;
     }
 
     login(username: string, password: string, authUrl: string): string {
-        console.log('LoginService#login() called');
+        // console.log('LoginService#login() called');
         if (this.authTokenProvider.getToken()) {
-            console.log('Token found');
+            console.log('Login token found');
             this.loggedInSubject.next(true);
             return undefined;
         } else {
@@ -46,7 +45,7 @@ export class LoginService implements OnInit, OnDestroy {
                 let found = data.filter(user => user.Username === username && user.Password === password);
                 console.log('Found user' , found);
                 let isFound = found == undefined ? false : true;
-                console.log(`LoginService#login isFound: ${isFound}`);
+                // console.log(`LoginService#login isFound: ${isFound}`);
 
                 this.loggedInSubject.next(isFound);
                 if (found) {

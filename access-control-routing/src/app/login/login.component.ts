@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit {
 
 
     onSubmit(form): void {
-      console.log(`Inside onSubmit() with username ${form.username} and password ${form.password}`);
+    //   console.log(`Inside onSubmit() with username ${form.username} and password ${form.password}`);
 
       this.loginMessage = this.loginService.login(form.username, form.password, this.iAuthUrl);
 

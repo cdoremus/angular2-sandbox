@@ -39,7 +39,7 @@ export class LoginLinkComponent implements OnInit {
 
     linkClicked(event) {
         let linkText: string = event.target.firstChild.data;
-        console.log('LoginLinkComponent#linkClicked(event) event', event.target.firstChild.data);
+        // console.log('LoginLinkComponent#linkClicked(event) event', event.target.firstChild.data);
 
         // toggle the link text
         switch (linkText) {
