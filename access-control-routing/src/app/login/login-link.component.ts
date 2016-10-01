@@ -1,12 +1,11 @@
 import { Component, OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 
 import { LoginService } from './login.service';
+import { LoginLinkService, LOGIN_LINKTEXT, LOGOUT_LINKTEXT } from './login-link.service';
 import { AuthenticationTokenProvider } from './authentication-token';
 
-
-export const LOGIN_LINKTEXT = 'Login';
-export const LOGOUT_LINKTEXT = 'Logout';
 
 /**
  * Nav bar link for logging in.
@@ -21,7 +20,7 @@ export const LOGOUT_LINKTEXT = 'Logout';
         }
     `],
     template: `
-        <a class="login-link" (click)="linkClicked()">{{linkText}}</a>
+        <a class="login-link" (click)="linkClicked($event)">{{linkText}}</a>
     `
 })
 export class LoginLinkComponent implements OnInit {
@@ -30,26 +29,30 @@ export class LoginLinkComponent implements OnInit {
     constructor(
         private router: Router,
         private loginService: LoginService,
+        private loginLinkService: LoginLinkService,
         private authTokenProvider: AuthenticationTokenProvider) {
     }
 
     ngOnInit() {
-        this.linkText = LOGIN_LINKTEXT;
+        this.loginLinkService.loginLinkTextSubject.subscribe(link => this.linkText = link);
     }
 
-    linkClicked() {
+    linkClicked(event) {
+        let linkText: string = event.target.firstChild.data;
+        console.log('LoginLinkComponent#linkClicked(event) event', event.target.firstChild.data);
+
         // toggle the link text
-        switch (this.linkText) {
+        switch (linkText) {
             case LOGIN_LINKTEXT:
-                this.linkText = LOGOUT_LINKTEXT;
+                this.loginLinkService.loginLinkTextSubject.next(LOGOUT_LINKTEXT);
                 break;
             case LOGOUT_LINKTEXT:
                 this.authTokenProvider.removeToken();
                 this.loginService.loggedInSubject.next(false);
-                this.linkText = LOGIN_LINKTEXT;
+                this.loginLinkService.loginLinkTextSubject.next(LOGIN_LINKTEXT);
                 break;
             default:
-                console.error(`Unknown link: ${this.linkText}`);
+                console.error(`Unknown link: ${linkText}`);
                 break;
         }
         this.router.navigate(['/login']);

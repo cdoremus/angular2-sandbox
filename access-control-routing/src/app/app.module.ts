@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { LoginComponent, USER_AUTH_URL, authUrl } from './login/login.component';
 import { LoginLinkComponent } from './login/login-link.component';
+import { LoginLinkService } from './login/login-link.service'        ;
 import { LoginService } from './login/login.service';
 import { LoginGuard } from './login/login.guard';
 import { AuthenticationTokenProvider } from './login/authentication-token';
@@ -36,6 +37,7 @@ import { routing } from './app.routing';
     {provide: USER_AUTH_URL, useValue: authUrl},
     ApiService,
     LoginService,
+    LoginLinkService,
     LoginGuard,
     {provide: AuthenticationTokenProvider, useClass: LocalAuthTokenProvider}
   ],

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
+import { LOGOUT_LINKTEXT } from './login-link.service';
+import { LoginLinkService } from './login-link.service';
 
 // Change based on local vs remote calls and deployment location
 export const USER_AUTH_URL = 'AUTH_URL';
@@ -69,7 +71,7 @@ export const authUrl = './users.json';
               </fieldset>
             </form>
         </div>
-  `,
+  `
 })
 export class LoginComponent implements OnInit {
     @Input() username: string;
@@ -78,6 +80,7 @@ export class LoginComponent implements OnInit {
 
     constructor(
       private loginService: LoginService,
+      private loginLinkService: LoginLinkService,
       private router: Router,
       @Inject(USER_AUTH_URL) private iAuthUrl: string) {
     }
@@ -94,7 +97,9 @@ export class LoginComponent implements OnInit {
 
       if (!this.loginMessage) {
           this.loginService.loggedInSubject.next(true);
+          this.loginLinkService.loginLinkTextSubject.next(LOGOUT_LINKTEXT);
           this.router.navigate(['home']);
+
       }
       //TODO: Display message if it exists
     }
