@@ -21,10 +21,17 @@ of the User interface.
 
 The DialogComponent is an example of a component that displays a popup dialog using an auxilliary route.
 
-The dialog is displayed using the router-outlet element with a name attribute
+The dialog is displayed using the router-outlet element with a name attribute (name="dialog")
 and a hyperlink to show the dialog uses a specially configured routerLink directive
-(see [app.component.html](https://github.com/cdoremus/angular2-sandbox/tree/routing/routing/src/app/app.component.html)).
-The route is configured in [app.routing.ts](https://github.com/cdoremus/angular2-sandbox/tree/routing/routing/src/app/app.routing.ts).
+(see documentation in [app.component.html](https://github.com/cdoremus/angular2-sandbox/tree/routing/routing/src/app/app.component.html)).
+The route is configured in [app.routing.ts](https://github.com/cdoremus/angular2-sandbox/tree/routing/routing/src/app/app.routing.ts)
+(note the dialog-path record).
+
+Note that the hyperlink created by the routerLink directive is '/home(dialog:dialog-path)'. The first part inside the parenthesis
+is the router outlet name. The second part is the router path configured in app.routing.ts.
+
+Since the named router outlet (name="dialog") is placed in the app component template and the default (root or '/') route points to
+the home component, clicking on the 'Show Dialog' link or 'Dialog' menu link will always place the Dialog in the home page.
 
 #### Dialog Screenshot
 ![display-dialog-screenshot](screenshots/displayed-dialog-screenshot.png "")
