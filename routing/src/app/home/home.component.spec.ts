@@ -1,9 +1,6 @@
-// This shows a different way of testing a component, check about for a simpler one
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { TestBed } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
 
@@ -12,7 +9,7 @@ describe('Home Component', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserModule, FormsModule, RouterTestingModule ],
+      imports: [ RouterTestingModule ],
       declarations: [HomeComponent, TestComponent]
     });
     TestBed.overrideComponent(TestComponent, { set: { template: html }});
