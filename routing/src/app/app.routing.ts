@@ -12,9 +12,11 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   // defines a path to the router-outlet that displays a dialog via the DialogComponent class
   { path: 'dialog-path', component: DialogComponent, outlet: 'dialog' },
-  { path: 'users', component: UsersComponent},
-  { path: 'users/:id', component: UserDetailsComponent},
-
+  { path: 'users',  children: [
+    { path: '', component: UsersComponent },
+    { path: ':id', component: UserDetailsComponent }
+    ]
+  }
 ];
 
 export const routing = RouterModule.forRoot(routes);
