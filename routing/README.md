@@ -4,6 +4,19 @@
 
 This branch is designed to demonstrate routing alternatives in Angular 2.
 
+### Parent and Child Routes
+The UsersComponent and UserDetailsComponent in the users folder demonstrates
+navigation with parent and child routes setup in app.routing.ts. Clicking on the
+'Users' menu link invokes the UserComponent to display a list of users. Each
+user on the list is hyer-linked to the UserDetailsComponent via the user's id property.
+Clicking on the name will display user details in the UserDetailsComponent template.
+
+The UsersComponent and UserDetailComponent use the UsersService that makes ajax calls
+using the Angular 2 Http service to a JSON file (public/users.json). The returned users
+are loaded into a data structure defined by the User interface in user.interfaces.ts.
+This file also contains, Address, Location and Company interfaces which are properties
+of the User interface.
+
 ### Auxlliary Routes
 
 The DialogComponent is an example of a component that displays a popup dialog using an auxilliary route.
