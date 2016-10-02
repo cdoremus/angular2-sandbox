@@ -1,0 +1,20 @@
+<div class="login-form-container login-form-font">
+    <form #form="ngForm" (ngSubmit)="onSubmit(form.value)" method="post">
+        <fieldset class="form-container">
+        <legend>Please login</legend>
+            <fieldset>
+                <label class="form-label">User name:</label>
+                <input type="text" class="text-input login-form-font" name="username"
+                    placeholder="Enter user name" tabindex="1" ngModel/>
+            </fieldset>
+            <fieldset>
+                <label class="form-label">Password:</label>
+                <input type="password" class="text-input login-form-font" name="password"
+                    placeholder="Enter password" tabindex="2" ngModel/>
+            </fieldset>
+            <div class="submit-container">
+                <input type="submit" class="login-button login-form-font" tabindex="3" value="Login" />
+            </div>
+        </fieldset>
+    </form>
+</div>

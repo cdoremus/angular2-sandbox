@@ -1,0 +1,37 @@
+.login-form-container {
+    margin:5px;
+}
+.login-form-font {
+    font-size:20px;
+}
+.form-label {
+    display:block;
+    margin-left:10px;
+    margin-right:auto;
+    text-align: left;
+}
+legend {
+    margin: 0 0 auto 0;
+    font-size: 30px;
+    text-align:left;
+}
+.text-input {
+    width:350px;
+    height:30px;
+}
+fieldset {
+    border:0;
+    margin:5px auto;
+}
+.form-container {
+    margin:0 auto;
+    width: 400px;
+    border: 2px solid black;
+}
+.submit-container {
+    margin:0 auto;
+    width: 70px;
+}
+.login-button {
+    margin-bottom: 10px;
+}
