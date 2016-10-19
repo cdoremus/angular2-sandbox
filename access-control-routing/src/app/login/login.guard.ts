@@ -11,12 +11,17 @@ export class LoginGuard implements CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-        // console.log(`Route snapshot url: `, route.url[0].path);
+        console.log(`Route snapshot url: `, route.url[0].path);
         let ok: Observable<boolean>  = this.loginService.isLoggedIn();
         ok.subscribe(isOk => {
+            let path = route.url[0].path;
             if (!isOk) {
-              this.router.navigate(['/login']);
+              path = '/login';
+              this.router.navigate([path]);
             }
+            console.log('New navigation path: ', path);
+
+            this.loginService.currentUrlPathSubject.next(path);
         });
         return ok;
     }

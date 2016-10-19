@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
     @Input() username: string;
     @Input() password: string;
     loginMessage: string;
+    navigationPath: string = 'home';
 
     constructor(
       private loginService: LoginService,
@@ -28,20 +29,24 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
       console.log('Inside ngOnInit()');
+      this.loginService.currentUrlPathSubject.subscribe(path => this.navigationPath = path ? path : 'home');
     }
 
 
     onSubmit(form): void {
-    //   console.log(`Inside onSubmit() with username ${form.username} and password ${form.password}`);
 
       this.loginMessage = this.loginService.login(form.username, form.password, this.iAuthUrl);
-
+      // loginMessage value indicates unsuccessful login
       if (!this.loginMessage) {
+          console.log('Login OK. Navigating to ' + this.navigationPath);
+          // signify that the user is logged in
           this.loginService.loggedInSubject.next(true);
+          // update login link to Logout
           this.loginLinkService.loginLinkTextSubject.next(LOGOUT_LINKTEXT);
-          this.router.navigate(['home']);
-
+          this.router.navigate([this.navigationPath]);
+      } else {
+          console.log('Login failed');
+        //TODO: Display message if it exists
       }
-      //TODO: Display message if it exists
     }
 }

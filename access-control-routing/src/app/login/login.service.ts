@@ -9,6 +9,7 @@ import { AuthenticationTokenProvider } from './authentication-token';
 @Injectable()
 export class LoginService implements OnInit, OnDestroy {
     loggedInSubject: Subject<boolean> = new BehaviorSubject<boolean>(false);
+    currentUrlPathSubject: Subject<string> = new BehaviorSubject('');
 
     constructor(
       private authTokenProvider: AuthenticationTokenProvider,
@@ -22,8 +23,12 @@ export class LoginService implements OnInit, OnDestroy {
         if (this.loggedInSubject) {
             this.loggedInSubject.unsubscribe();
         }
+        if(this.currentUrlPathSubject) {
+            this.currentUrlPathSubject.unsubscribe();
+        }
     }
 
+    /** Is a user logged in? */
     isLoggedIn(): Observable<boolean> {
         // console.log('LoginService#isLoggedIn() called');
         let ok: Observable<boolean> = this.loggedInSubject.first();
@@ -35,6 +40,7 @@ export class LoginService implements OnInit, OnDestroy {
         // console.log('LoginService#login() called');
         if (this.authTokenProvider.getToken()) {
             console.log('Login token found');
+            // the user is logged in
             this.loggedInSubject.next(true);
             return undefined;
         } else {
@@ -45,8 +51,8 @@ export class LoginService implements OnInit, OnDestroy {
                 let found = data.filter(user => user.Username === username && user.Password === password);
                 console.log('Found user' , found);
                 let isFound = found == undefined ? false : true;
-                // console.log(`LoginService#login isFound: ${isFound}`);
-
+                console.log(`LoginService#login isFound: ${isFound}`);
+                // sets whether the user is logged in
                 this.loggedInSubject.next(isFound);
                 if (found) {
                     console.log('Login success');
@@ -65,6 +71,7 @@ export class LoginService implements OnInit, OnDestroy {
     }
 
     logout(): void {
+        // the user is no longer logged in
         this.loggedInSubject.next(false);
         this.authTokenProvider.removeToken();
     }

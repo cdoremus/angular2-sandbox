@@ -48,6 +48,7 @@ export class LoginLinkComponent implements OnInit {
                 break;
             case LOGOUT_LINKTEXT:
                 this.authTokenProvider.removeToken();
+                // the user is no longer logged in
                 this.loginService.loggedInSubject.next(false);
                 this.loginLinkService.loginLinkTextSubject.next(LOGIN_LINKTEXT);
                 break;
