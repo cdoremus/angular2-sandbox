@@ -1,0 +1,11 @@
+<div>
+  <form  [formGroup]="form">
+    <label>Reactive form Dropdown (select):</label>
+    <select formControlName="userSelect">
+        <option *ngFor="let user of users | async"
+          [ngValue]="user">
+            {{user.name}}
+        </option>
+    </select>
+  </form>
+</div>

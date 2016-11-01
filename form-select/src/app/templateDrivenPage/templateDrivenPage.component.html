@@ -1,0 +1,16 @@
+<p>
+  TemplateDrivenPageComponent Works!
+</p>
+<form #form="ngForm">
+  <my-template-form
+    [users]="users"
+    [selectedUser]="currentUser"
+    (selected)="onSelected($event)"></my-template-form>
+</form>
+
+<div id="emittedUserContainer">
+  <h5> Currently Selected User Emitted from Dropdown Component:</h5>
+  <pre>
+    {{ currentUser | json }}
+  </pre>
+</div>

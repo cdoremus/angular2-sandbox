@@ -1,0 +1,10 @@
+<div>
+  <label>Template-driven Dropdown (select):</label>
+  <select name="userSelect" [ngModel]="selectedUser"
+    (ngModelChange)="onSelected($event)">
+      <option *ngFor="let user of users | async"
+        [ngValue]="user">
+          {{user.name}}
+      </option>
+  </select>
+</div>

@@ -1,0 +1,11 @@
+// component styles are encapsulated and only applied to their components
+* {
+  color: #FFEF00;
+}
+
+#emittedUserContainer {
+  border: 2px solid #000;
+  border-radius: 5%;
+  margin: 25px auto;
+  width: 350px;
+}
