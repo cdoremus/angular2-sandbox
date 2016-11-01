@@ -7,13 +7,18 @@ import Message from './message';
 describe('Messages Component', () => {
   const html = '<span>{{title}}</span>';
   beforeEach(() => {
-    TestBed.configureTestingModule({declarations: [MessagesComponent]});
+    TestBed.configureTestingModule({
+      imports: [],
+      declarations: [MessagesComponent]
+    });
   });
 
 
   it('should be defined', () => {
     const fixture = TestBed.createComponent(MessagesComponent);
-    const component: MessagesComponent = fixture.debugElement.componentInstance;
+    const component: MessagesComponent = fixture.componentInstance;
+    fixture.detectChanges();
+
     expect(component.messages).toBeDefined();
   });
 
