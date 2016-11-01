@@ -1,5 +1,5 @@
 # angular2-sandbox form-select-master branch
-Holds experiments with Angular 2 forms focusing on the form select control.
+Holds experiments with Angular 2 forms focusing on the select control.
 This branch currently uses Angular 2.1.2.
 
 ```bash
