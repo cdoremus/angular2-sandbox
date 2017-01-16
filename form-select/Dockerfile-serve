@@ -1,6 +1,8 @@
 # Dockerfile-serve
 #
-# Serves the application
+# Serves the application in A Docker container using the nginx server
+#
+# This is run by the docker-compose.yml file.
 #
 FROM nginx
 COPY dist /usr/share/nginx/html
