@@ -1,0 +1,30 @@
+# docker-compose.xml
+#
+# Build the image:
+# docker-compose build
+#
+# Run the image:
+# docker-compose up
+#
+# browse to http://localhost:80
+#
+# Stop and delete the container and image
+# docker-compose down
+# (alternate use docker-compose to only stop the container)
+#
+version: "2"
+services:
+  ng-serve:
+    build:
+      context: .
+      dockerfile: Dockerfile-serve
+    ports:
+      - "80:80"
+    image: form-select-serve
+    depends_on:
+      - "ng-build"
+  ng-build:
+    build:
+      context: .
+      dockerfile: Dockerfile-build
+    image: form-select-build

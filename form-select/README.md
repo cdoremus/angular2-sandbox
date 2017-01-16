@@ -10,6 +10,25 @@ child components, one that encapsulates an HTML button and another that is used 
 
 All child components are designed as presentational components, containing only inputs and outputs.
 
+## Build and run this project with Docker
+
+1. Build the project:
+``` bash
+docker-compose build
+```
+
+2. Run the project in a Docker container:
+``` bash
+docker-compose up -d
+```
+After the app comes up, browse to [http://localhost](http://localhost) to run the application.
+
+3. Stop the Docker container and delete it:
+``` bash
+docker-compose down
+```
+You can use ```docker-compose stop``` to stop the container without deleting it
+
 ## Seed Project
 This project is based on the seed project [angular2-webpack](https://github.com/preboot/angular2-webpack)
 
