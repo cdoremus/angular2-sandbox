@@ -15,4 +15,8 @@ export class AppComponent {
   constructor(private api: ApiService) {
     // Do something with api
   }
+
+  getTitle(): string {
+    return this.api.title;
+  }
 }
