@@ -1,3 +1,4 @@
+import { UsersModule } from './users/users.module';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
@@ -7,8 +8,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { DialogComponent } from './dialog/dialog.component';
-import { UsersComponent } from './users/users.component';
-import { UserDetailsComponent } from './users/user-details.component';
 import { ApiService } from './shared';
 import { routing } from './app.routing';
 
@@ -19,12 +18,11 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     BrowserModule,
     HttpModule,
     FormsModule,
-    routing
+    routing,
+    UsersModule
   ],
   declarations: [
     AppComponent,
-    UsersComponent,
-    UserDetailsComponent,
     HomeComponent,
     AboutComponent,
     DialogComponent,

@@ -17,6 +17,8 @@ are loaded into a data structure defined by the User interface in user.interface
 This file also contains, Address, Location and Company interfaces which are properties
 of the User interface.
 
+A UsersModule holds all user-related code and routes.
+
 ### Auxlliary Routes
 
 The DialogComponent is an example of a component that displays a popup dialog using an auxilliary route.
